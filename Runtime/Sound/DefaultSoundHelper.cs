@@ -5,7 +5,8 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
-using GameFrameX.Asset;
+using GameFrameX.Asset.Runtime;
+using GameFrameX.Runtime;
 
 namespace GameFrameX.Sound.Runtime
 {

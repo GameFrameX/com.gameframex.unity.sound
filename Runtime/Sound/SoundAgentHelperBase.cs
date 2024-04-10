@@ -177,7 +177,7 @@ namespace GameFrameX.Sound.Runtime
         /// 设置声音绑定的实体。
         /// </summary>
         /// <param name="bindingEntity">声音绑定的实体。</param>
-        public abstract void SetBindingEntity(Entity bindingEntity);
+        public abstract void SetBindingEntity(Entity.Runtime.Entity bindingEntity);
 
         /// <summary>
         /// 设置声音所在的世界坐标。

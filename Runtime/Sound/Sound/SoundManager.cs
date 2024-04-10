@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameFrameX.Asset;
+using GameFrameX.Asset.Runtime;
 using UnityEngine;
 
 namespace GameFrameX.Sound
@@ -88,14 +89,14 @@ namespace GameFrameX.Sound
         /// </summary>
         /// <param name="elapseSeconds">逻辑流逝时间，以秒为单位。</param>
         /// <param name="realElapseSeconds">真实流逝时间，以秒为单位。</param>
-        protected internal override void Update(float elapseSeconds, float realElapseSeconds)
+        protected override void Update(float elapseSeconds, float realElapseSeconds)
         {
         }
 
         /// <summary>
         /// 关闭并清理声音管理器。
         /// </summary>
-        protected internal override void Shutdown()
+        protected override void Shutdown()
         {
             StopAllLoadedSounds();
             m_SoundGroups.Clear();
@@ -312,7 +313,7 @@ namespace GameFrameX.Sound
         /// <returns>声音的序列编号。</returns>
         public Task<int> PlaySound(string soundAssetName, string soundGroupName)
         {
-            return PlaySound(soundAssetName, soundGroupName, Asset.Constant.DefaultPriority, null, null);
+            return PlaySound(soundAssetName, soundGroupName, Constant.DefaultPriority, null, null);
         }
 
         /// <summary>
@@ -336,7 +337,7 @@ namespace GameFrameX.Sound
         /// <returns>声音的序列编号。</returns>
         public Task<int> PlaySound(string soundAssetName, string soundGroupName, PlaySoundParams playSoundParams)
         {
-            return PlaySound(soundAssetName, soundGroupName, Asset.Constant.DefaultPriority, playSoundParams, null);
+            return PlaySound(soundAssetName, soundGroupName, Constant.DefaultPriority, playSoundParams, null);
         }
 
         /// <summary>
@@ -348,7 +349,7 @@ namespace GameFrameX.Sound
         /// <returns>声音的序列编号。</returns>
         public Task<int> PlaySound(string soundAssetName, string soundGroupName, object userData)
         {
-            return PlaySound(soundAssetName, soundGroupName, Asset.Constant.DefaultPriority, null, userData);
+            return PlaySound(soundAssetName, soundGroupName, Constant.DefaultPriority, null, userData);
         }
 
         /// <summary>
@@ -387,7 +388,7 @@ namespace GameFrameX.Sound
         /// <returns>声音的序列编号。</returns>
         public async Task<int> PlaySound(string soundAssetName, string soundGroupName, PlaySoundParams playSoundParams, object userData)
         {
-            return await PlaySound(soundAssetName, soundGroupName, Asset.Constant.DefaultPriority, playSoundParams, userData);
+            return await PlaySound(soundAssetName, soundGroupName, Constant.DefaultPriority, playSoundParams, userData);
         }
 
         /// <summary>

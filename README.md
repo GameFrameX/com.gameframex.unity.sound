@@ -2,7 +2,7 @@
 
 GameFrameX 的 Sound 声音管理组件
 
-**Sound 声音管理组件 (Fsm Component)** - 提供声音管理组件相关的接口。
+**Sound 声音管理组件 (Sound Component)** - 提供声音管理组件相关的接口。
 
 # 使用文档(文档编写于GPT4)
 

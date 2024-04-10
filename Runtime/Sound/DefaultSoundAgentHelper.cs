@@ -5,10 +5,9 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
-using GameFrameX;
-using GameFrameX.Sound;
 using System;
 using System.Collections;
+using GameFrameX.Entity.Runtime;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -334,7 +333,7 @@ namespace GameFrameX.Sound.Runtime
         /// 设置声音绑定的实体。
         /// </summary>
         /// <param name="bindingEntity">声音绑定的实体。</param>
-        public override void SetBindingEntity(Entity bindingEntity)
+        public override void SetBindingEntity(Entity.Runtime.Entity bindingEntity)
         {
             m_BindingEntityLogic = bindingEntity.Logic;
             if (m_BindingEntityLogic != null)

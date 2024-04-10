@@ -5,14 +5,13 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
-using GameFrameX;
 using UnityEngine;
 
 namespace GameFrameX.Sound.Runtime
 {
     internal sealed class PlaySoundInfo : IReference
     {
-        private Entity m_BindingEntity;
+        private Entity.Runtime.Entity m_BindingEntity;
         private Vector3 m_WorldPosition;
         private object m_UserData;
 
@@ -23,7 +22,7 @@ namespace GameFrameX.Sound.Runtime
             m_UserData = null;
         }
 
-        public Entity BindingEntity
+        public Entity.Runtime.Entity BindingEntity
         {
             get
             {
@@ -47,7 +46,7 @@ namespace GameFrameX.Sound.Runtime
             }
         }
 
-        public static PlaySoundInfo Create(Entity bindingEntity, Vector3 worldPosition, object userData)
+        public static PlaySoundInfo Create(Entity.Runtime.Entity bindingEntity, Vector3 worldPosition, object userData)
         {
             PlaySoundInfo playSoundInfo = ReferencePool.Acquire<PlaySoundInfo>();
             playSoundInfo.m_BindingEntity = bindingEntity;

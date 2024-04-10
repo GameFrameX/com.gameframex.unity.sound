@@ -5,12 +5,12 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
-#if UNITY_5_3
-using GameFramework.Scene;
-#endif
-using GameFrameX.Sound;
 using System.Collections.Generic;
 using GameFrameX.Asset;
+using GameFrameX.Asset.Runtime;
+using GameFrameX.Event.Runtime;
+using GameFrameX.Runtime;
+using GameFrameX.Scene.Runtime;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -350,7 +350,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="bindingEntity">声音绑定的实体。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, Entity bindingEntity)
+        public int PlaySound(string soundAssetName, string soundGroupName, Entity.Runtime.Entity bindingEntity)
         {
             return PlaySound(soundAssetName, soundGroupName, DefaultPriority, null, bindingEntity, null);
         }
@@ -418,7 +418,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="bindingEntity">声音绑定的实体。</param>
         /// <returns>声音的序列编号。</returns>
         public int PlaySound(string soundAssetName, string soundGroupName, int priority,
-            PlaySoundParams playSoundParams, Entity bindingEntity)
+            PlaySoundParams playSoundParams, Entity.Runtime.Entity bindingEntity)
         {
             return PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, bindingEntity, null);
         }
@@ -434,7 +434,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>声音的序列编号。</returns>
         public int PlaySound(string soundAssetName, string soundGroupName, int priority,
-            PlaySoundParams playSoundParams, Entity bindingEntity, object userData)
+            PlaySoundParams playSoundParams, Entity.Runtime.Entity bindingEntity, object userData)
         {
             return m_SoundManager.PlaySound(soundAssetName, soundGroupName, priority, playSoundParams,
                 PlaySoundInfo.Create(bindingEntity, Vector3.zero, userData)).Result;
@@ -639,22 +639,22 @@ namespace GameFrameX.Sound.Runtime
             m_EventComponent.Fire(this, eventArgs);
         }
 
-        private void OnLoadSceneSuccess(object sender, GameFrameX.Scene.LoadSceneSuccessEventArgs e)
+        private void OnLoadSceneSuccess(object sender, LoadSceneSuccessEventArgs e)
         {
             RefreshAudioListener();
         }
 
-        private void OnLoadSceneFailure(object sender, GameFrameX.Scene.LoadSceneFailureEventArgs e)
+        private void OnLoadSceneFailure(object sender, LoadSceneFailureEventArgs e)
         {
             RefreshAudioListener();
         }
 
-        private void OnUnloadSceneSuccess(object sender, GameFrameX.Scene.UnloadSceneSuccessEventArgs e)
+        private void OnUnloadSceneSuccess(object sender, UnloadSceneSuccessEventArgs e)
         {
             RefreshAudioListener();
         }
 
-        private void OnUnloadSceneFailure(object sender, GameFrameX.Scene.UnloadSceneFailureEventArgs e)
+        private void OnUnloadSceneFailure(object sender, UnloadSceneFailureEventArgs e)
         {
             RefreshAudioListener();
         }
