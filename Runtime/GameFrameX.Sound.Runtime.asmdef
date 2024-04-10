@@ -1,0 +1,16 @@
+{
+    "name": "GameFrameX.Sound.Runtime",
+    "references": [
+        "GameFrameX.Runtime"
+    ],
+    "rootNamespace": "GameFrameX.Sound.Runtime",
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
