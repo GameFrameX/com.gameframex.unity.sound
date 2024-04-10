@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Scripting;
 
 namespace GameFrameX.Sound.Runtime
 {
+    [Preserve]
     public class GameFrameXSoundCroppingHelper : MonoBehaviour
     {
+        [Preserve]
         private void Start()
         {
             _ = typeof(DefaultSoundAgentHelper);
