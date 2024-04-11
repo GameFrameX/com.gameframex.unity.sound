@@ -1,5 +1,5 @@
 {
-  "name": "com.alianblank.gameframex.sound",
+  "name": "com.alianblank.gameframex.unity.sound",
   "displayName": "Game Frame X Sound",
   "category": "Game Framework X",
   "description": "Game Frame X Sound Component",
@@ -9,7 +9,7 @@
     "Game Framework X"
   ],
   "repository": {
-    "name": "com.alianblank.gameframex.sound",
+    "name": "com.alianblank.gameframex.unity.sound",
     "url": "https://github.com/AlianBlank/com.alianblank.gameframex.unity.sound.git",
     "type": "git"
   },
