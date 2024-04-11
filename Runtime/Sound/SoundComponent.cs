@@ -5,6 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using GameFrameX.Asset;
 using GameFrameX.Asset.Runtime;
@@ -72,8 +73,9 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         protected override void Awake()
         {
+            ImplementationComponentType = Type.GetType(componentType);
+            InterfaceComponentType = typeof(ISoundManager);
             base.Awake();
-            new SoundManager();
             m_SoundManager = GameFrameworkEntry.GetModule<ISoundManager>();
             if (m_SoundManager == null)
             {

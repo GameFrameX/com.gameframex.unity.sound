@@ -12,7 +12,7 @@ using UnityEditor;
 namespace GameFrameX.Sound.Editor
 {
     [CustomEditor(typeof(SoundComponent))]
-    internal sealed class SoundComponentInspector : GameFrameworkInspector
+    internal sealed class SoundComponentInspector : ComponentTypeComponentInspector
     {
         // private SerializedProperty m_EnablePlaySoundUpdateEvent = null;
         // private SerializedProperty m_EnablePlaySoundDependencyAssetEvent = null;
@@ -55,14 +55,16 @@ namespace GameFrameX.Sound.Editor
             Repaint();
         }
 
-        protected override void OnCompileComplete()
+        protected override void RefreshTypeNames()
         {
-            base.OnCompileComplete();
-
-            RefreshTypeNames();
+            RefreshComponentTypeNames(typeof(ISoundManager));
+            m_SoundHelperInfo.Refresh();
+            m_SoundGroupHelperInfo.Refresh();
+            m_SoundAgentHelperInfo.Refresh();
+            serializedObject.ApplyModifiedProperties();
         }
 
-        private void OnEnable()
+        protected override void Enable()
         {
             // m_EnablePlaySoundUpdateEvent = serializedObject.FindProperty("m_EnablePlaySoundUpdateEvent");
             // m_EnablePlaySoundDependencyAssetEvent = serializedObject.FindProperty("m_EnablePlaySoundDependencyAssetEvent");
@@ -75,14 +77,6 @@ namespace GameFrameX.Sound.Editor
             m_SoundAgentHelperInfo.Init(serializedObject);
 
             RefreshTypeNames();
-        }
-
-        private void RefreshTypeNames()
-        {
-            m_SoundHelperInfo.Refresh();
-            m_SoundGroupHelperInfo.Refresh();
-            m_SoundAgentHelperInfo.Refresh();
-            serializedObject.ApplyModifiedProperties();
         }
     }
 }
