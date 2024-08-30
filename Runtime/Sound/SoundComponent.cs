@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using GameFrameX.Asset;
+using Cysharp.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
 using GameFrameX.Event.Runtime;
 using GameFrameX.Runtime;
@@ -316,7 +316,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundAssetName">声音资源名称。</param>
         /// <param name="soundGroupName">声音组名称。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName)
+        public UniTask<int> PlaySound(string soundAssetName, string soundGroupName)
         {
             return PlaySound(soundAssetName, soundGroupName, DefaultPriority, null, null, null);
         }
@@ -328,7 +328,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="priority">加载声音资源的优先级。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, int priority)
+        public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority)
         {
             return PlaySound(soundAssetName, soundGroupName, priority, null, null, null);
         }
@@ -340,7 +340,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="playSoundParams">播放声音参数。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, PlaySoundParams playSoundParams)
+        public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, PlaySoundParams playSoundParams)
         {
             return PlaySound(soundAssetName, soundGroupName, DefaultPriority, playSoundParams, null, null);
         }
@@ -352,7 +352,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="bindingEntity">声音绑定的实体。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, Entity.Runtime.Entity bindingEntity)
+        public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, Entity.Runtime.Entity bindingEntity)
         {
             return PlaySound(soundAssetName, soundGroupName, DefaultPriority, null, bindingEntity, null);
         }
@@ -364,7 +364,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="worldPosition">声音所在的世界坐标。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, Vector3 worldPosition)
+        public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, Vector3 worldPosition)
         {
             return PlaySound(soundAssetName, soundGroupName, DefaultPriority, null, worldPosition, null);
         }
@@ -376,7 +376,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, object userData)
+        public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, object userData)
         {
             return PlaySound(soundAssetName, soundGroupName, DefaultPriority, null, null, userData);
         }
@@ -389,7 +389,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="priority">加载声音资源的优先级。</param>
         /// <param name="playSoundParams">播放声音参数。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, int priority,
+        public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority,
             PlaySoundParams playSoundParams)
         {
             return PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, null, null);
@@ -404,7 +404,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="playSoundParams">播放声音参数。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, int priority,
+        public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority,
             PlaySoundParams playSoundParams, object userData)
         {
             return PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, null, userData);
@@ -419,10 +419,10 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="playSoundParams">播放声音参数。</param>
         /// <param name="bindingEntity">声音绑定的实体。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, int priority,
+        public async UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority,
             PlaySoundParams playSoundParams, Entity.Runtime.Entity bindingEntity)
         {
-            return PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, bindingEntity, null);
+            return await PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, bindingEntity, null);
         }
 
         /// <summary>
@@ -435,11 +435,11 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="bindingEntity">声音绑定的实体。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, int priority,
+        public async UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority,
             PlaySoundParams playSoundParams, Entity.Runtime.Entity bindingEntity, object userData)
         {
-            return m_SoundManager.PlaySound(soundAssetName, soundGroupName, priority, playSoundParams,
-                PlaySoundInfo.Create(bindingEntity, Vector3.zero, userData)).Result;
+            return await m_SoundManager.PlaySound(soundAssetName, soundGroupName, priority, playSoundParams,
+                PlaySoundInfo.Create(bindingEntity, Vector3.zero, userData));
         }
 
         /// <summary>
@@ -451,7 +451,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="playSoundParams">播放声音参数。</param>
         /// <param name="worldPosition">声音所在的世界坐标。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, int priority,
+        public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority,
             PlaySoundParams playSoundParams, Vector3 worldPosition)
         {
             return PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, worldPosition, null);
@@ -467,11 +467,11 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="worldPosition">声音所在的世界坐标。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>声音的序列编号。</returns>
-        public int PlaySound(string soundAssetName, string soundGroupName, int priority,
+        public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority,
             PlaySoundParams playSoundParams, Vector3 worldPosition, object userData)
         {
             return m_SoundManager.PlaySound(soundAssetName, soundGroupName, priority, playSoundParams,
-                PlaySoundInfo.Create(null, worldPosition, userData)).Result;
+                PlaySoundInfo.Create(null, worldPosition, userData));
         }
 
         /// <summary>
