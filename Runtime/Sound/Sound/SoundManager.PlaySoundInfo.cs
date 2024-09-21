@@ -5,6 +5,8 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
+using GameFrameX.Runtime;
+
 namespace GameFrameX.Sound
 {
     public sealed partial class SoundManager : GameFrameworkModule, ISoundManager

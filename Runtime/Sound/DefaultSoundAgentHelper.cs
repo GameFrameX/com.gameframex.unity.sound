@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using GameFrameX.Entity.Runtime;
+using GameFrameX.Runtime;
 using UnityEngine;
 using UnityEngine.Audio;
 

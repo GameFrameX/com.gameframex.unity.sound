@@ -5,6 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
+using GameFrameX.Runtime;
 using UnityEngine;
 
 namespace GameFrameX.Sound.Runtime
