@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
+using GameFrameX.Runtime;
 using UnityEngine;
 using YooAsset;
 
@@ -17,6 +18,7 @@ namespace GameFrameX.Sound
     /// <summary>
     /// 声音管理器。
     /// </summary>
+    [UnityEngine.Scripting.Preserve]
     public sealed partial class SoundManager : GameFrameworkModule, ISoundManager
     {
         private readonly Dictionary<string, SoundGroup> m_SoundGroups;
