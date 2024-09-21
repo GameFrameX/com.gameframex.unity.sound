@@ -73,7 +73,7 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         protected override void Awake()
         {
-            ImplementationComponentType = Type.GetType(componentType);
+            ImplementationComponentType = Utility.Assembly.GetType(componentType);
             InterfaceComponentType = typeof(ISoundManager);
             base.Awake();
             m_SoundManager = GameFrameworkEntry.GetModule<ISoundManager>();
