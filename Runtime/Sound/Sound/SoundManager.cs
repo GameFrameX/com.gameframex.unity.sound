@@ -368,6 +368,18 @@ namespace GameFrameX.Sound
         }
 
         /// <summary>
+        /// 播放声音。并设置指定的序列编号
+        /// </summary>
+        /// <param name="soundAssetName">声音资源名称。</param>
+        /// <param name="soundGroupName">声音组名称。</param>
+        /// <param name="serialId">加载声音资源的优先级。</param>
+        /// <returns>声音的序列编号。</returns>
+        public UniTask<int> PlaySoundBySerialId(string soundAssetName, string soundGroupName, int serialId)
+        {
+            return PlaySound(soundAssetName, soundGroupName, Constant.DefaultPriority, null, null, serialId);
+        }
+
+        /// <summary>
         /// 播放声音。
         /// </summary>
         /// <param name="soundAssetName">声音资源名称。</param>
@@ -401,8 +413,9 @@ namespace GameFrameX.Sound
         /// <param name="priority">加载声音资源的优先级。</param>
         /// <param name="playSoundParams">播放声音参数。</param>
         /// <param name="userData">用户自定义数据。</param>
+        /// <param name="serialId">序列编号</param>
         /// <returns>声音的序列编号。</returns>
-        public async UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority, PlaySoundParams playSoundParams, object userData)
+        public async UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority, PlaySoundParams playSoundParams, object userData, int serialId = -1)
         {
             if (_assetManager == null)
             {
@@ -419,7 +432,17 @@ namespace GameFrameX.Sound
                 playSoundParams = PlaySoundParams.Create();
             }
 
-            int serialId = ++m_Serial;
+            int newSerialId;
+            if (serialId >= 0)
+            {
+                newSerialId = serialId;
+            }
+            else
+            {
+                newSerialId = ++m_Serial;
+            }
+
+
             PlaySoundErrorCode? errorCode = null;
             string errorMessage = null;
             SoundGroup soundGroup = (SoundGroup)GetSoundGroup(soundGroupName);
@@ -439,7 +462,7 @@ namespace GameFrameX.Sound
                 if (m_PlaySoundFailureEventHandler != null)
                 {
                     PlaySoundFailureEventArgs playSoundFailureEventArgs =
-                        PlaySoundFailureEventArgs.Create(serialId, soundAssetName, soundGroupName, playSoundParams, errorCode.Value, errorMessage, userData);
+                        PlaySoundFailureEventArgs.Create(newSerialId, soundAssetName, soundGroupName, playSoundParams, errorCode.Value, errorMessage, userData);
                     m_PlaySoundFailureEventHandler(this, playSoundFailureEventArgs);
                     // ReferencePool.Release(playSoundFailureEventArgs);
 
@@ -448,23 +471,23 @@ namespace GameFrameX.Sound
                         ReferencePool.Release(playSoundParams);
                     }
 
-                    return serialId;
+                    return newSerialId;
                 }
 
                 throw new GameFrameworkException(errorMessage);
             }
 
-            m_SoundsBeingLoaded.Add(serialId);
+            m_SoundsBeingLoaded.Add(newSerialId);
             var assetOperationHandle = await _assetManager.LoadAssetAsync<AudioClip>(soundAssetName);
 
             void OnAssetOperationHandleOnCompleted(AssetHandle assetHandle)
             {
                 var assetObject = assetHandle.GetAssetObject<AudioClip>();
-                LoadAssetSuccessCallback(soundAssetName, assetObject, assetObject.length, PlaySoundInfo.Create(serialId, soundGroup, playSoundParams, userData));
+                LoadAssetSuccessCallback(soundAssetName, assetObject, assetObject.length, PlaySoundInfo.Create(newSerialId, soundGroup, playSoundParams, userData));
             }
 
             assetOperationHandle.Completed += OnAssetOperationHandleOnCompleted;
-            return serialId;
+            return newSerialId;
         }
 
         /// <summary>

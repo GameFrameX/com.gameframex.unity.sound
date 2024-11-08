@@ -193,8 +193,9 @@ namespace GameFrameX.Sound
         /// <param name="priority">加载声音资源的优先级。</param>
         /// <param name="playSoundParams">播放声音参数。</param>
         /// <param name="userData">用户自定义数据。</param>
+        /// <param name="serialId">序列编号</param>
         /// <returns>声音的序列编号。</returns>
-        UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority, PlaySoundParams playSoundParams, object userData);
+        UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority, PlaySoundParams playSoundParams, object userData, int serialId);
 
         /// <summary>
         /// 停止播放声音。
