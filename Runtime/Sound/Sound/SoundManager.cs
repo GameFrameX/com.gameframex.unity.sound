@@ -461,8 +461,7 @@ namespace GameFrameX.Sound
             {
                 if (m_PlaySoundFailureEventHandler != null)
                 {
-                    PlaySoundFailureEventArgs playSoundFailureEventArgs =
-                        PlaySoundFailureEventArgs.Create(newSerialId, soundAssetName, soundGroupName, playSoundParams, errorCode.Value, errorMessage, userData);
+                    PlaySoundFailureEventArgs playSoundFailureEventArgs = PlaySoundFailureEventArgs.Create(newSerialId, soundAssetName, soundGroupName, playSoundParams, errorCode.Value, errorMessage, userData);
                     m_PlaySoundFailureEventHandler(this, playSoundFailureEventArgs);
                     // ReferencePool.Release(playSoundFailureEventArgs);
 
@@ -483,7 +482,7 @@ namespace GameFrameX.Sound
             void OnAssetOperationHandleOnCompleted(AssetHandle assetHandle)
             {
                 var assetObject = assetHandle.GetAssetObject<AudioClip>();
-                LoadAssetSuccessCallback(soundAssetName, assetObject, assetObject.length, PlaySoundInfo.Create(newSerialId, soundGroup, playSoundParams, userData));
+                LoadAssetSuccessCallback(soundAssetName, assetObject, assetHandle.Duration, PlaySoundInfo.Create(newSerialId, soundGroup, playSoundParams, userData));
             }
 
             assetOperationHandle.Completed += OnAssetOperationHandleOnCompleted;
