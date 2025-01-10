@@ -341,6 +341,19 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundAssetName">声音资源名称。</param>
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="playSoundParams">播放声音参数。</param>
+        /// <param name="serialId">序列编号。</param>
+        /// <returns>声音的序列编号。</returns>
+        public UniTask<int> PlaySoundBySerialId(string soundAssetName, string soundGroupName, int serialId, PlaySoundParams playSoundParams)
+        {
+            return PlaySound(soundAssetName, soundGroupName, DefaultPriority, playSoundParams, null, null, serialId);
+        }
+
+        /// <summary>
+        /// 播放声音。
+        /// </summary>
+        /// <param name="soundAssetName">声音资源名称。</param>
+        /// <param name="soundGroupName">声音组名称。</param>
+        /// <param name="playSoundParams">播放声音参数。</param>
         /// <returns>声音的序列编号。</returns>
         public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, PlaySoundParams playSoundParams)
         {
