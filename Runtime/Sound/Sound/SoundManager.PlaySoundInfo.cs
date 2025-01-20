@@ -11,13 +11,34 @@ namespace GameFrameX.Sound.Runtime
 {
     public sealed partial class SoundManager : GameFrameworkModule, ISoundManager
     {
+        /// <summary>
+        /// 播放声音信息。
+        /// </summary>
         private sealed class PlaySoundInfo : IReference
         {
+            /// <summary>
+            /// 序列编号。
+            /// </summary>
             private int m_SerialId;
+
+            /// <summary>
+            /// 声音组。
+            /// </summary>
             private SoundGroup m_SoundGroup;
+
+            /// <summary>
+            /// 播放声音参数。
+            /// </summary>
             private PlaySoundParams m_PlaySoundParams;
+
+            /// <summary>
+            /// 用户自定义数据。
+            /// </summary>
             private object m_UserData;
 
+            /// <summary>
+            /// 初始化播放声音信息的新实例。
+            /// </summary>
             public PlaySoundInfo()
             {
                 m_SerialId = 0;
@@ -26,6 +47,9 @@ namespace GameFrameX.Sound.Runtime
                 m_UserData = null;
             }
 
+            /// <summary>
+            /// 获取序列编号。
+            /// </summary>
             public int SerialId
             {
                 get
@@ -34,6 +58,9 @@ namespace GameFrameX.Sound.Runtime
                 }
             }
 
+            /// <summary>
+            /// 获取声音组。
+            /// </summary>
             public SoundGroup SoundGroup
             {
                 get
@@ -42,6 +69,9 @@ namespace GameFrameX.Sound.Runtime
                 }
             }
 
+            /// <summary>
+            /// 获取播放声音参数。
+            /// </summary>
             public PlaySoundParams PlaySoundParams
             {
                 get
@@ -50,6 +80,9 @@ namespace GameFrameX.Sound.Runtime
                 }
             }
 
+            /// <summary>
+            /// 获取用户自定义数据。
+            /// </summary>
             public object UserData
             {
                 get
@@ -58,6 +91,14 @@ namespace GameFrameX.Sound.Runtime
                 }
             }
 
+            /// <summary>
+            /// 创建播放声音信息。
+            /// </summary>
+            /// <param name="serialId">序列编号。</param>
+            /// <param name="soundGroup">声音组。</param>
+            /// <param name="playSoundParams">播放声音参数。</param>
+            /// <param name="userData">用户自定义数据。</param>
+            /// <returns>创建的播放声音信息。</returns>
             public static PlaySoundInfo Create(int serialId, SoundGroup soundGroup, PlaySoundParams playSoundParams, object userData)
             {
                 PlaySoundInfo playSoundInfo = ReferencePool.Acquire<PlaySoundInfo>();
@@ -68,6 +109,9 @@ namespace GameFrameX.Sound.Runtime
                 return playSoundInfo;
             }
 
+            /// <summary>
+            /// 清理播放声音信息。
+            /// </summary>
             public void Clear()
             {
                 m_SerialId = 0;

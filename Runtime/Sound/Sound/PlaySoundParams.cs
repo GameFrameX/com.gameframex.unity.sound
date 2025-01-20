@@ -14,17 +14,64 @@ namespace GameFrameX.Sound.Runtime
     /// </summary>
     public sealed class PlaySoundParams : IReference
     {
+        /// <summary>
+        /// 是否被引用。
+        /// </summary>
         private bool m_Referenced;
+        
+        /// <summary>
+        /// 播放位置。
+        /// </summary>
         private float m_Time;
+        
+        /// <summary>
+        /// 在声音组内是否静音。
+        /// </summary>
         private bool m_MuteInSoundGroup;
+        
+        /// <summary>
+        /// 是否循环播放。
+        /// </summary>
         private bool m_Loop;
+        
+        /// <summary>
+        /// 声音优先级。
+        /// </summary>
         private int m_Priority;
+        
+        /// <summary>
+        /// 在声音组内音量大小。
+        /// </summary>
         private float m_VolumeInSoundGroup;
+        
+        /// <summary>
+        /// 声音淡入时间，以秒为单位。
+        /// </summary>
         private float m_FadeInSeconds;
+        
+        /// <summary>
+        /// 声音音调。
+        /// </summary>
         private float m_Pitch;
+        
+        /// <summary>
+        /// 声音立体声声相。
+        /// </summary>
         private float m_PanStereo;
+        
+        /// <summary>
+        /// 声音空间混合量。
+        /// </summary>
         private float m_SpatialBlend;
+        
+        /// <summary>
+        /// 声音最大距离。
+        /// </summary>
         private float m_MaxDistance;
+        
+        /// <summary>
+        /// 声音多普勒等级。
+        /// </summary>
         private float m_DopplerLevel;
 
         /// <summary>
@@ -51,14 +98,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public float Time
         {
-            get
-            {
-                return m_Time;
-            }
-            set
-            {
-                m_Time = value;
-            }
+            get { return m_Time; }
+            set { m_Time = value; }
         }
 
         /// <summary>
@@ -66,14 +107,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public bool MuteInSoundGroup
         {
-            get
-            {
-                return m_MuteInSoundGroup;
-            }
-            set
-            {
-                m_MuteInSoundGroup = value;
-            }
+            get { return m_MuteInSoundGroup; }
+            set { m_MuteInSoundGroup = value; }
         }
 
         /// <summary>
@@ -81,14 +116,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public bool Loop
         {
-            get
-            {
-                return m_Loop;
-            }
-            set
-            {
-                m_Loop = value;
-            }
+            get { return m_Loop; }
+            set { m_Loop = value; }
         }
 
         /// <summary>
@@ -96,14 +125,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public int Priority
         {
-            get
-            {
-                return m_Priority;
-            }
-            set
-            {
-                m_Priority = value;
-            }
+            get { return m_Priority; }
+            set { m_Priority = value; }
         }
 
         /// <summary>
@@ -111,14 +134,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public float VolumeInSoundGroup
         {
-            get
-            {
-                return m_VolumeInSoundGroup;
-            }
-            set
-            {
-                m_VolumeInSoundGroup = value;
-            }
+            get { return m_VolumeInSoundGroup; }
+            set { m_VolumeInSoundGroup = value; }
         }
 
         /// <summary>
@@ -126,14 +143,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public float FadeInSeconds
         {
-            get
-            {
-                return m_FadeInSeconds;
-            }
-            set
-            {
-                m_FadeInSeconds = value;
-            }
+            get { return m_FadeInSeconds; }
+            set { m_FadeInSeconds = value; }
         }
 
         /// <summary>
@@ -141,14 +152,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public float Pitch
         {
-            get
-            {
-                return m_Pitch;
-            }
-            set
-            {
-                m_Pitch = value;
-            }
+            get { return m_Pitch; }
+            set { m_Pitch = value; }
         }
 
         /// <summary>
@@ -156,14 +161,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public float PanStereo
         {
-            get
-            {
-                return m_PanStereo;
-            }
-            set
-            {
-                m_PanStereo = value;
-            }
+            get { return m_PanStereo; }
+            set { m_PanStereo = value; }
         }
 
         /// <summary>
@@ -171,14 +170,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public float SpatialBlend
         {
-            get
-            {
-                return m_SpatialBlend;
-            }
-            set
-            {
-                m_SpatialBlend = value;
-            }
+            get { return m_SpatialBlend; }
+            set { m_SpatialBlend = value; }
         }
 
         /// <summary>
@@ -186,14 +179,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public float MaxDistance
         {
-            get
-            {
-                return m_MaxDistance;
-            }
-            set
-            {
-                m_MaxDistance = value;
-            }
+            get { return m_MaxDistance; }
+            set { m_MaxDistance = value; }
         }
 
         /// <summary>
@@ -201,29 +188,24 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public float DopplerLevel
         {
-            get
-            {
-                return m_DopplerLevel;
-            }
-            set
-            {
-                m_DopplerLevel = value;
-            }
+            get { return m_DopplerLevel; }
+            set { m_DopplerLevel = value; }
         }
 
+        /// <summary>
+        /// 获取是否被引用。
+        /// </summary>
         internal bool Referenced
         {
-            get
-            {
-                return m_Referenced;
-            }
+            get { return m_Referenced; }
         }
 
         /// <summary>
         /// 创建播放声音参数。
         /// </summary>
+        /// <param name="isLoop">是否循环播放。</param>
         /// <returns>创建的播放声音参数。</returns>
-        public static PlaySoundParams Create(bool isLoop =false)
+        public static PlaySoundParams Create(bool isLoop = false)
         {
             PlaySoundParams playSoundParams = ReferencePool.Acquire<PlaySoundParams>();
             playSoundParams.m_Referenced = true;

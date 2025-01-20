@@ -32,11 +32,6 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         event EventHandler<PlaySoundFailureEventArgs> PlaySoundFailure;
 
-        /*/// <summary>
-        /// 播放声音更新事件。
-        /// </summary>
-        event EventHandler<PlaySoundUpdateEventArgs> PlaySoundUpdate;*/
-
         /// <summary>
         /// 设置资源管理器。
         /// </summary>

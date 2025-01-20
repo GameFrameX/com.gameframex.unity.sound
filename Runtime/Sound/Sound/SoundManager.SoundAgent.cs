@@ -17,13 +17,44 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         private sealed class SoundAgent : ISoundAgent
         {
+            /// <summary>
+            /// 所在的声音组。
+            /// </summary>
             private readonly SoundGroup m_SoundGroup;
+            
+            /// <summary>
+            /// 声音辅助器。
+            /// </summary>
             private readonly ISoundHelper m_SoundHelper;
+            
+            /// <summary>
+            /// 声音代理辅助器。
+            /// </summary>
             private readonly ISoundAgentHelper m_SoundAgentHelper;
+            
+            /// <summary>
+            /// 声音的序列编号。
+            /// </summary>
             private int m_SerialId;
+            
+            /// <summary>
+            /// 声音资源。
+            /// </summary>
             private object m_SoundAsset;
+            
+            /// <summary>
+            /// 设置声音资源的时间。
+            /// </summary>
             private DateTime m_SetSoundAssetTime;
+            
+            /// <summary>
+            /// 在声音组内是否静音。
+            /// </summary>
             private bool m_MuteInSoundGroup;
+            
+            /// <summary>
+            /// 在声音组内音量大小。
+            /// </summary>
             private float m_VolumeInSoundGroup;
 
             /// <summary>
@@ -395,6 +426,11 @@ namespace GameFrameX.Sound.Runtime
                 m_SoundAgentHelper.Reset();
             }
 
+            /// <summary>
+            /// 设置声音资源。
+            /// </summary>
+            /// <param name="soundAsset">声音资源。</param>
+            /// <returns>是否设置声音资源成功。</returns>
             internal bool SetSoundAsset(object soundAsset)
             {
                 Reset();
@@ -403,16 +439,27 @@ namespace GameFrameX.Sound.Runtime
                 return m_SoundAgentHelper.SetSoundAsset(soundAsset);
             }
 
+            /// <summary>
+            /// 刷新静音设置。
+            /// </summary>
             internal void RefreshMute()
             {
                 m_SoundAgentHelper.Mute = m_SoundGroup.Mute || m_MuteInSoundGroup;
             }
 
+            /// <summary>
+            /// 刷新音量设置。
+            /// </summary>
             internal void RefreshVolume()
             {
                 m_SoundAgentHelper.Volume = m_SoundGroup.Volume * m_VolumeInSoundGroup;
             }
 
+            /// <summary>
+            /// 重置声音代理事件的回调函数。
+            /// </summary>
+            /// <param name="sender">事件发送者。</param>
+            /// <param name="e">事件参数。</param>
             private void OnResetSoundAgent(object sender, ResetSoundAgentEventArgs e)
             {
                 Reset();
