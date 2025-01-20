@@ -8,7 +8,7 @@
 using System;
 using GameFrameX.Runtime;
 
-namespace GameFrameX.Sound
+namespace GameFrameX.Sound.Runtime
 {
     public sealed partial class SoundManager : GameFrameworkModule, ISoundManager
     {

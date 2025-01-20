@@ -8,7 +8,7 @@
 using GameFrameX.Event.Runtime;
 using GameFrameX.Runtime;
 
-namespace GameFrameX.Sound
+namespace GameFrameX.Sound.Runtime
 {
     /// <summary>
     /// 播放声音成功事件。

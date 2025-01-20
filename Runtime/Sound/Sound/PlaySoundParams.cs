@@ -7,7 +7,7 @@
 
 using GameFrameX.Runtime;
 
-namespace GameFrameX.Sound
+namespace GameFrameX.Sound.Runtime
 {
     /// <summary>
     /// 播放声音参数。
@@ -223,10 +223,11 @@ namespace GameFrameX.Sound
         /// 创建播放声音参数。
         /// </summary>
         /// <returns>创建的播放声音参数。</returns>
-        public static PlaySoundParams Create()
+        public static PlaySoundParams Create(bool isLoop =false)
         {
             PlaySoundParams playSoundParams = ReferencePool.Acquire<PlaySoundParams>();
             playSoundParams.m_Referenced = true;
+            playSoundParams.m_Loop = isLoop;
             return playSoundParams;
         }
 

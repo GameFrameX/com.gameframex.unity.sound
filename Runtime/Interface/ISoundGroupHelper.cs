@@ -5,17 +5,12 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
-namespace GameFrameX.Sound
+namespace GameFrameX.Sound.Runtime
 {
     /// <summary>
-    /// 声音辅助器接口。
+    /// 声音组辅助器接口。
     /// </summary>
-    public interface ISoundHelper
+    public interface ISoundGroupHelper
     {
-        /// <summary>
-        /// 释放声音资源。
-        /// </summary>
-        /// <param name="soundAsset">要释放的声音资源。</param>
-        void ReleaseSoundAsset(object soundAsset);
     }
 }

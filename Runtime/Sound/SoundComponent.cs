@@ -605,7 +605,7 @@ namespace GameFrameX.Sound.Runtime
             return true;
         }
 
-        private void OnPlaySoundSuccess(object sender, GameFrameX.Sound.PlaySoundSuccessEventArgs eventArgs)
+        private void OnPlaySoundSuccess(object sender, PlaySoundSuccessEventArgs eventArgs)
         {
             PlaySoundInfo playSoundInfo = (PlaySoundInfo)eventArgs.UserData;
             if (playSoundInfo != null)
@@ -624,7 +624,7 @@ namespace GameFrameX.Sound.Runtime
             m_EventComponent.Fire(this, eventArgs);
         }
 
-        private void OnPlaySoundFailure(object sender, GameFrameX.Sound.PlaySoundFailureEventArgs eventArgs)
+        private void OnPlaySoundFailure(object sender, PlaySoundFailureEventArgs eventArgs)
         {
             string logMessage = Utility.Text.Format("Play sound failure, asset name '{0}', sound group name '{1}', error code '{2}', error message '{3}'.",
                                                     eventArgs.SoundAssetName, eventArgs.SoundGroupName, eventArgs.ErrorCode, eventArgs.ErrorMessage);
@@ -640,7 +640,7 @@ namespace GameFrameX.Sound.Runtime
             m_EventComponent.Fire(this, eventArgs);
         }
 
-        private void OnPlaySoundUpdate(object sender, GameFrameX.Sound.PlaySoundUpdateEventArgs eventArgs)
+        private void OnPlaySoundUpdate(object sender, PlaySoundUpdateEventArgs eventArgs)
         {
             m_EventComponent.Fire(this, eventArgs);
         }

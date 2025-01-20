@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
-namespace GameFrameX.Sound
+namespace GameFrameX.Sound.Runtime
 {
     /// <summary>
     /// 播放声音错误码。

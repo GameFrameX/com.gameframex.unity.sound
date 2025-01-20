@@ -5,29 +5,15 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
-namespace GameFrameX.Sound
+using System;
+
+namespace GameFrameX.Sound.Runtime
 {
     /// <summary>
-    /// 声音代理接口。
+    /// 声音代理辅助器接口。
     /// </summary>
-    public interface ISoundAgent
+    public interface ISoundAgentHelper
     {
-        /// <summary>
-        /// 获取所在的声音组。
-        /// </summary>
-        ISoundGroup SoundGroup
-        {
-            get;
-        }
-
-        /// <summary>
-        /// 获取声音的序列编号。
-        /// </summary>
-        int SerialId
-        {
-            get;
-        }
-
         /// <summary>
         /// 获取当前是否正在播放。
         /// </summary>
@@ -59,14 +45,6 @@ namespace GameFrameX.Sound
         bool Mute
         {
             get;
-        }
-
-        /// <summary>
-        /// 获取或设置在声音组内是否静音。
-        /// </summary>
-        bool MuteInSoundGroup
-        {
-            get;
             set;
         }
 
@@ -89,17 +67,9 @@ namespace GameFrameX.Sound
         }
 
         /// <summary>
-        /// 获取音量大小。
+        /// 获取或设置音量大小。
         /// </summary>
         float Volume
-        {
-            get;
-        }
-
-        /// <summary>
-        /// 获取或设置在声音组内音量大小。
-        /// </summary>
-        float VolumeInSoundGroup
         {
             get;
             set;
@@ -151,17 +121,9 @@ namespace GameFrameX.Sound
         }
 
         /// <summary>
-        /// 获取声音代理辅助器。
+        /// 重置声音代理事件。
         /// </summary>
-        ISoundAgentHelper Helper
-        {
-            get;
-        }
-
-        /// <summary>
-        /// 播放声音。
-        /// </summary>
-        void Play();
+        event EventHandler<ResetSoundAgentEventArgs> ResetSoundAgent;
 
         /// <summary>
         /// 播放声音。
@@ -172,18 +134,8 @@ namespace GameFrameX.Sound
         /// <summary>
         /// 停止播放声音。
         /// </summary>
-        void Stop();
-
-        /// <summary>
-        /// 停止播放声音。
-        /// </summary>
         /// <param name="fadeOutSeconds">声音淡出时间，以秒为单位。</param>
         void Stop(float fadeOutSeconds);
-
-        /// <summary>
-        /// 暂停播放声音。
-        /// </summary>
-        void Pause();
 
         /// <summary>
         /// 暂停播放声音。
@@ -194,17 +146,19 @@ namespace GameFrameX.Sound
         /// <summary>
         /// 恢复播放声音。
         /// </summary>
-        void Resume();
-
-        /// <summary>
-        /// 恢复播放声音。
-        /// </summary>
         /// <param name="fadeInSeconds">声音淡入时间，以秒为单位。</param>
         void Resume(float fadeInSeconds);
 
         /// <summary>
-        /// 重置声音代理。
+        /// 重置声音代理辅助器。
         /// </summary>
         void Reset();
+
+        /// <summary>
+        /// 设置声音资源。
+        /// </summary>
+        /// <param name="soundAsset">声音资源。</param>
+        /// <returns>是否设置声音资源成功。</returns>
+        bool SetSoundAsset(object soundAsset);
     }
 }

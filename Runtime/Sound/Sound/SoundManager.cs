@@ -13,7 +13,7 @@ using GameFrameX.Runtime;
 using UnityEngine;
 using YooAsset;
 
-namespace GameFrameX.Sound
+namespace GameFrameX.Sound.Runtime
 {
     /// <summary>
     /// 声音管理器。

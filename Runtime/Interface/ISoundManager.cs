@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
 
-namespace GameFrameX.Sound
+namespace GameFrameX.Sound.Runtime
 {
     /// <summary>
     /// 声音管理器接口。
