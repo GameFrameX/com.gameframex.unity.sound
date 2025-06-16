@@ -1,9 +1,9 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
+﻿// GameFrameX 组织下的以及组织衍生的项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// 
+// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE 文件。
+// 
+// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+
 
 using System;
 using System.Collections;
@@ -31,10 +31,7 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override bool IsPlaying
         {
-            get
-            {
-                return m_AudioSource.isPlaying;
-            }
+            get { return m_AudioSource.isPlaying; }
         }
 
         /// <summary>
@@ -42,10 +39,7 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override float Length
         {
-            get
-            {
-                return m_AudioSource.clip != null ? m_AudioSource.clip.length : 0f;
-            }
+            get { return m_AudioSource.clip != null ? m_AudioSource.clip.length : 0f; }
         }
 
         /// <summary>
@@ -53,14 +47,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override float Time
         {
-            get
-            {
-                return m_AudioSource.time;
-            }
-            set
-            {
-                m_AudioSource.time = value;
-            }
+            get { return m_AudioSource.time; }
+            set { m_AudioSource.time = value; }
         }
 
         /// <summary>
@@ -68,14 +56,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override bool Mute
         {
-            get
-            {
-                return m_AudioSource.mute;
-            }
-            set
-            {
-                m_AudioSource.mute = value;
-            }
+            get { return m_AudioSource.mute; }
+            set { m_AudioSource.mute = value; }
         }
 
         /// <summary>
@@ -83,14 +65,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override bool Loop
         {
-            get
-            {
-                return m_AudioSource.loop;
-            }
-            set
-            {
-                m_AudioSource.loop = value;
-            }
+            get { return m_AudioSource.loop; }
+            set { m_AudioSource.loop = value; }
         }
 
         /// <summary>
@@ -98,14 +74,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override int Priority
         {
-            get
-            {
-                return 128 - m_AudioSource.priority;
-            }
-            set
-            {
-                m_AudioSource.priority = 128 - value;
-            }
+            get { return 128 - m_AudioSource.priority; }
+            set { m_AudioSource.priority = 128 - value; }
         }
 
         /// <summary>
@@ -113,14 +83,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override float Volume
         {
-            get
-            {
-                return m_AudioSource.volume;
-            }
-            set
-            {
-                m_AudioSource.volume = value;
-            }
+            get { return m_AudioSource.volume; }
+            set { m_AudioSource.volume = value; }
         }
 
         /// <summary>
@@ -128,14 +92,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override float Pitch
         {
-            get
-            {
-                return m_AudioSource.pitch;
-            }
-            set
-            {
-                m_AudioSource.pitch = value;
-            }
+            get { return m_AudioSource.pitch; }
+            set { m_AudioSource.pitch = value; }
         }
 
         /// <summary>
@@ -143,14 +101,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override float PanStereo
         {
-            get
-            {
-                return m_AudioSource.panStereo;
-            }
-            set
-            {
-                m_AudioSource.panStereo = value;
-            }
+            get { return m_AudioSource.panStereo; }
+            set { m_AudioSource.panStereo = value; }
         }
 
         /// <summary>
@@ -158,14 +110,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override float SpatialBlend
         {
-            get
-            {
-                return m_AudioSource.spatialBlend;
-            }
-            set
-            {
-                m_AudioSource.spatialBlend = value;
-            }
+            get { return m_AudioSource.spatialBlend; }
+            set { m_AudioSource.spatialBlend = value; }
         }
 
         /// <summary>
@@ -173,15 +119,9 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override float MaxDistance
         {
-            get
-            {
-                return m_AudioSource.maxDistance;
-            }
+            get { return m_AudioSource.maxDistance; }
 
-            set
-            {
-                m_AudioSource.maxDistance = value;
-            }
+            set { m_AudioSource.maxDistance = value; }
         }
 
         /// <summary>
@@ -189,14 +129,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override float DopplerLevel
         {
-            get
-            {
-                return m_AudioSource.dopplerLevel;
-            }
-            set
-            {
-                m_AudioSource.dopplerLevel = value;
-            }
+            get { return m_AudioSource.dopplerLevel; }
+            set { m_AudioSource.dopplerLevel = value; }
         }
 
         /// <summary>
@@ -204,14 +138,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override AudioMixerGroup AudioMixerGroup
         {
-            get
-            {
-                return m_AudioSource.outputAudioMixerGroup;
-            }
-            set
-            {
-                m_AudioSource.outputAudioMixerGroup = value;
-            }
+            get { return m_AudioSource.outputAudioMixerGroup; }
+            set { m_AudioSource.outputAudioMixerGroup = value; }
         }
 
         /// <summary>
@@ -219,14 +147,8 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public override event EventHandler<ResetSoundAgentEventArgs> ResetSoundAgent
         {
-            add
-            {
-                m_ResetSoundAgentEventHandler += value;
-            }
-            remove
-            {
-                m_ResetSoundAgentEventHandler -= value;
-            }
+            add { m_ResetSoundAgentEventHandler += value; }
+            remove { m_ResetSoundAgentEventHandler -= value; }
         }
 
         /// <summary>

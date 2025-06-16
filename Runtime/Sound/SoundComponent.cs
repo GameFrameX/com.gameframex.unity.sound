@@ -1,9 +1,9 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
+﻿// GameFrameX 组织下的以及组织衍生的项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// 
+// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE 文件。
+// 
+// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+
 
 using System;
 using System.Collections.Generic;
@@ -134,9 +134,9 @@ namespace GameFrameX.Sound.Runtime
             }
 
             soundHelper.name = "Sound Helper";
-            Transform transform = soundHelper.transform;
-            transform.SetParent(this.transform);
-            transform.localScale = Vector3.one;
+            Transform soundTransform = soundHelper.transform;
+            soundTransform.SetParent(this.transform);
+            soundTransform.localScale = Vector3.one;
 
             m_SoundManager.SetSoundHelper(soundHelper);
 
@@ -239,9 +239,9 @@ namespace GameFrameX.Sound.Runtime
             }
 
             soundGroupHelper.name = Utility.Text.Format("Sound Group - {0}", soundGroupName);
-            Transform transform = soundGroupHelper.transform;
-            transform.SetParent(m_InstanceRoot);
-            transform.localScale = Vector3.one;
+            Transform soundGroupTransform = soundGroupHelper.transform;
+            soundGroupTransform.SetParent(m_InstanceRoot);
+            soundGroupTransform.localScale = Vector3.one;
 
             if (m_AudioMixer != null)
             {
@@ -583,9 +583,9 @@ namespace GameFrameX.Sound.Runtime
             }
 
             soundAgentHelper.name = Utility.Text.Format("Sound Agent Helper - {0} - {1}", soundGroupName, index);
-            Transform transform = soundAgentHelper.transform;
-            transform.SetParent(soundGroupHelper.transform);
-            transform.localScale = Vector3.one;
+            var soundAgentHelperTransform = soundAgentHelper.transform;
+            soundAgentHelperTransform.SetParent(soundGroupHelper.transform);
+            soundAgentHelperTransform.localScale = Vector3.one;
 
             if (m_AudioMixer != null)
             {

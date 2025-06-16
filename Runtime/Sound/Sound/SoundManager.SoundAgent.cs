@@ -1,9 +1,9 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
+﻿// GameFrameX 组织下的以及组织衍生的项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// 
+// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE 文件。
+// 
+// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+
 
 using System;
 using GameFrameX.Runtime;
@@ -21,37 +21,37 @@ namespace GameFrameX.Sound.Runtime
             /// 所在的声音组。
             /// </summary>
             private readonly SoundGroup m_SoundGroup;
-            
+
             /// <summary>
             /// 声音辅助器。
             /// </summary>
             private readonly ISoundHelper m_SoundHelper;
-            
+
             /// <summary>
             /// 声音代理辅助器。
             /// </summary>
             private readonly ISoundAgentHelper m_SoundAgentHelper;
-            
+
             /// <summary>
             /// 声音的序列编号。
             /// </summary>
             private int m_SerialId;
-            
+
             /// <summary>
             /// 声音资源。
             /// </summary>
             private object m_SoundAsset;
-            
+
             /// <summary>
             /// 设置声音资源的时间。
             /// </summary>
             private DateTime m_SetSoundAssetTime;
-            
+
             /// <summary>
             /// 在声音组内是否静音。
             /// </summary>
             private bool m_MuteInSoundGroup;
-            
+
             /// <summary>
             /// 在声音组内音量大小。
             /// </summary>
@@ -94,10 +94,7 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public ISoundGroup SoundGroup
             {
-                get
-                {
-                    return m_SoundGroup;
-                }
+                get { return m_SoundGroup; }
             }
 
             /// <summary>
@@ -105,14 +102,8 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public int SerialId
             {
-                get
-                {
-                    return m_SerialId;
-                }
-                set
-                {
-                    m_SerialId = value;
-                }
+                get { return m_SerialId; }
+                set { m_SerialId = value; }
             }
 
             /// <summary>
@@ -120,10 +111,7 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public bool IsPlaying
             {
-                get
-                {
-                    return m_SoundAgentHelper.IsPlaying;
-                }
+                get { return m_SoundAgentHelper.IsPlaying; }
             }
 
             /// <summary>
@@ -131,10 +119,7 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public float Length
             {
-                get
-                {
-                    return m_SoundAgentHelper.Length;
-                }
+                get { return m_SoundAgentHelper.Length; }
             }
 
             /// <summary>
@@ -142,14 +127,8 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public float Time
             {
-                get
-                {
-                    return m_SoundAgentHelper.Time;
-                }
-                set
-                {
-                    m_SoundAgentHelper.Time = value;
-                }
+                get { return m_SoundAgentHelper.Time; }
+                set { m_SoundAgentHelper.Time = value; }
             }
 
             /// <summary>
@@ -157,10 +136,7 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public bool Mute
             {
-                get
-                {
-                    return m_SoundAgentHelper.Mute;
-                }
+                get { return m_SoundAgentHelper.Mute; }
             }
 
             /// <summary>
@@ -168,10 +144,7 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public bool MuteInSoundGroup
             {
-                get
-                {
-                    return m_MuteInSoundGroup;
-                }
+                get { return m_MuteInSoundGroup; }
                 set
                 {
                     m_MuteInSoundGroup = value;
@@ -184,14 +157,8 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public bool Loop
             {
-                get
-                {
-                    return m_SoundAgentHelper.Loop;
-                }
-                set
-                {
-                    m_SoundAgentHelper.Loop = value;
-                }
+                get { return m_SoundAgentHelper.Loop; }
+                set { m_SoundAgentHelper.Loop = value; }
             }
 
             /// <summary>
@@ -199,14 +166,8 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public int Priority
             {
-                get
-                {
-                    return m_SoundAgentHelper.Priority;
-                }
-                set
-                {
-                    m_SoundAgentHelper.Priority = value;
-                }
+                get { return m_SoundAgentHelper.Priority; }
+                set { m_SoundAgentHelper.Priority = value; }
             }
 
             /// <summary>
@@ -214,10 +175,7 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public float Volume
             {
-                get
-                {
-                    return m_SoundAgentHelper.Volume;
-                }
+                get { return m_SoundAgentHelper.Volume; }
             }
 
             /// <summary>
@@ -225,10 +183,7 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public float VolumeInSoundGroup
             {
-                get
-                {
-                    return m_VolumeInSoundGroup;
-                }
+                get { return m_VolumeInSoundGroup; }
                 set
                 {
                     m_VolumeInSoundGroup = value;
@@ -241,14 +196,8 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public float Pitch
             {
-                get
-                {
-                    return m_SoundAgentHelper.Pitch;
-                }
-                set
-                {
-                    m_SoundAgentHelper.Pitch = value;
-                }
+                get { return m_SoundAgentHelper.Pitch; }
+                set { m_SoundAgentHelper.Pitch = value; }
             }
 
             /// <summary>
@@ -256,14 +205,8 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public float PanStereo
             {
-                get
-                {
-                    return m_SoundAgentHelper.PanStereo;
-                }
-                set
-                {
-                    m_SoundAgentHelper.PanStereo = value;
-                }
+                get { return m_SoundAgentHelper.PanStereo; }
+                set { m_SoundAgentHelper.PanStereo = value; }
             }
 
             /// <summary>
@@ -271,14 +214,8 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public float SpatialBlend
             {
-                get
-                {
-                    return m_SoundAgentHelper.SpatialBlend;
-                }
-                set
-                {
-                    m_SoundAgentHelper.SpatialBlend = value;
-                }
+                get { return m_SoundAgentHelper.SpatialBlend; }
+                set { m_SoundAgentHelper.SpatialBlend = value; }
             }
 
             /// <summary>
@@ -286,14 +223,8 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public float MaxDistance
             {
-                get
-                {
-                    return m_SoundAgentHelper.MaxDistance;
-                }
-                set
-                {
-                    m_SoundAgentHelper.MaxDistance = value;
-                }
+                get { return m_SoundAgentHelper.MaxDistance; }
+                set { m_SoundAgentHelper.MaxDistance = value; }
             }
 
             /// <summary>
@@ -301,14 +232,8 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public float DopplerLevel
             {
-                get
-                {
-                    return m_SoundAgentHelper.DopplerLevel;
-                }
-                set
-                {
-                    m_SoundAgentHelper.DopplerLevel = value;
-                }
+                get { return m_SoundAgentHelper.DopplerLevel; }
+                set { m_SoundAgentHelper.DopplerLevel = value; }
             }
 
             /// <summary>
@@ -316,10 +241,7 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             public ISoundAgentHelper Helper
             {
-                get
-                {
-                    return m_SoundAgentHelper;
-                }
+                get { return m_SoundAgentHelper; }
             }
 
             /// <summary>
@@ -327,10 +249,7 @@ namespace GameFrameX.Sound.Runtime
             /// </summary>
             internal DateTime SetSoundAssetTime
             {
-                get
-                {
-                    return m_SetSoundAssetTime;
-                }
+                get { return m_SetSoundAssetTime; }
             }
 
             /// <summary>
