@@ -43,6 +43,13 @@ namespace GameFrameX.Sound.Runtime
         ISoundGroupHelper Helper { get; }
 
         /// <summary>
+        /// 是否正在播放声音。
+        /// </summary>
+        /// <param name="serialId">声音的序列编号。</param>
+        /// <returns>正在播放则返回Ture,否则返回False,找不到指定的序列编号也会返回False</returns>
+        bool IsPlaying(int serialId);
+
+        /// <summary>
         /// 停止所有已加载的声音。
         /// </summary>
         void StopAllLoadedSounds();

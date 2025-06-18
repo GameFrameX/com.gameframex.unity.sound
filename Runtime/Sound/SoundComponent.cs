@@ -301,6 +301,28 @@ namespace GameFrameX.Sound.Runtime
         }
 
         /// <summary>
+        /// 是否正在播放声音。
+        /// </summary>
+        /// <param name="soundGroupName">声音组名称。</param>
+        /// <param name="serialId">声音序列编号。</param>
+        /// <returns>正在播放则返回Ture,否则返回False,找不到指定的序列编号也会返回False。</returns>
+        public bool IsPlaying(string soundGroupName, int serialId)
+        {
+            if (soundGroupName == null)
+            {
+                throw new GameFrameworkException("Sound group name is invalid.");
+            }
+
+            var soundGroup = GetSoundGroup(soundGroupName);
+            if (soundGroup == null)
+            {
+                throw new GameFrameworkException("Sound group is invalid.");
+            }
+
+            return soundGroup.IsPlaying(serialId);
+        }
+
+        /// <summary>
         /// 播放声音。
         /// </summary>
         /// <param name="soundAssetName">声音资源名称。</param>

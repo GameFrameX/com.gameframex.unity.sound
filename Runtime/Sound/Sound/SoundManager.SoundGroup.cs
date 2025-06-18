@@ -122,6 +122,24 @@ namespace GameFrameX.Sound.Runtime
             }
 
             /// <summary>
+            /// 是否正在播放声音。
+            /// </summary>
+            /// <param name="serialId">声音的序列编号。</param>
+            /// <returns>正在播放则返回Ture,否则返回False,找不到指定的序列编号也会返回False</returns>
+            public bool IsPlaying(int serialId)
+            {
+                foreach (SoundAgent soundAgent in m_SoundAgents)
+                {
+                    if (soundAgent.SerialId == serialId)
+                    {
+                        return soundAgent.IsPlaying;
+                    }
+                }
+
+                return false;
+            }
+
+            /// <summary>
             /// 播放声音。
             /// </summary>
             /// <param name="serialId">声音的序列编号。</param>
