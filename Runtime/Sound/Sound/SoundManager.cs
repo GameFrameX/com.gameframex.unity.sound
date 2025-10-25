@@ -482,7 +482,7 @@ namespace GameFrameX.Sound.Runtime
             void OnAssetOperationHandleOnCompleted(AssetHandle assetHandle)
             {
                 var assetObject = assetHandle.GetAssetObject<AudioClip>();
-                LoadAssetSuccessCallback(soundAssetName, assetObject, assetHandle.Duration, PlaySoundInfo.Create(newSerialId, soundGroup, playSoundParams, userData));
+                LoadAssetSuccessCallback(soundAssetName, assetObject, assetHandle.Duration(), PlaySoundInfo.Create(newSerialId, soundGroup, playSoundParams, userData));
             }
 
             assetOperationHandle.Completed += OnAssetOperationHandleOnCompleted;
