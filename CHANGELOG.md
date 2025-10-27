@@ -1,6 +1,14 @@
 # Changelog
 
-## [1.0.5](https://github.com/GameFrameX/com.gameframex.unity.sound/tree/1.0.5) (2025-06-18)
+## [1.0.6](https://github.com/GameFrameX/com.gameframex.unity.sound/tree/1.0.6) (2025-10-25)
+
+[Full Changelog](https://github.com/GameFrameX/com.gameframex.unity.sound/compare/1.0.5...1.0.6)
+
+**Merged pull requests:**
+
+- \[修复\]  修复调用Pause接口后，会被 Reset 数据 bug [\#2](https://github.com/GameFrameX/com.gameframex.unity.sound/pull/2) ([DreamChaseAndVera](https://github.com/DreamChaseAndVera))
+
+## [1.0.5](https://github.com/GameFrameX/com.gameframex.unity.sound/tree/1.0.5) (2025-06-21)
 
 [Full Changelog](https://github.com/GameFrameX/com.gameframex.unity.sound/compare/1.0.4...1.0.5)
 
