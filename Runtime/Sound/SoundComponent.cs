@@ -22,7 +22,7 @@ namespace GameFrameX.Sound.Runtime
     /// 声音组件。
     /// </summary>
     [DisallowMultipleComponent]
-    [AddComponentMenu("Game Framework/Sound")]
+    [AddComponentMenu("GameFrameX/Sound")]
     public sealed partial class SoundComponent : GameFrameworkComponent
     {
         private const int DefaultPriority = 0;
