@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.0.6...1.1.0) (2025-12-23)
+
+
+### Features
+
+* **ci:** change ci ([37d15f4](https://github.com/gameframex/com.gameframex.unity.sound/commit/37d15f4db842915fd5da70ee4598e6dfb491e88e))
+
 # Changelog
 
 ## [1.0.6](https://github.com/GameFrameX/com.gameframex.unity.sound/tree/1.0.6) (2025-10-25)
