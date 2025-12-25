@@ -130,6 +130,10 @@ namespace GameFrameX.Sound.Runtime
                 m_SerialId = 0;
                 m_SoundGroup = null;
                 m_PlaySoundParams = null;
+                if (m_UserData is Sound.Runtime.PlaySoundInfo soundInfo)
+                {
+                    ReferencePool.Release(soundInfo);
+                }
                 m_UserData = null;
             }
         }
