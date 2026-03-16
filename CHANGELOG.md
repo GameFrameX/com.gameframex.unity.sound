@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.1.0...1.1.1) (2026-03-16)
+
+
+### Bug Fixes
+
+* 修复获取资源加载耗时的属性名错误 ([317cac4](https://github.com/gameframex/com.gameframex.unity.sound/commit/317cac44b8cc21da5e7b8e0b38d0fae755038aa8))
+
 # [1.1.0](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.0.6...1.1.0) (2025-12-23)
 
 
