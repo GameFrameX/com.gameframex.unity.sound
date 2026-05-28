@@ -36,7 +36,6 @@ using Cysharp.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
 using GameFrameX.Event.Runtime;
 using GameFrameX.Runtime;
-using GameFrameX.Scene.Runtime;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -115,22 +114,8 @@ namespace GameFrameX.Sound.Runtime
 
             m_AudioListener = gameObject.GetOrAddComponent<AudioListener>();
 
-#if UNITY_5_4_OR_NEWER
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneUnloaded;
-#else
-            ISceneManager sceneManager = GameFrameworkEntry.GetModule<ISceneManager>();
-            if (sceneManager == null)
-            {
-                Log.Fatal("Scene manager is invalid.");
-                return;
-            }
-
-            sceneManager.LoadSceneSuccess += OnLoadSceneSuccess;
-            sceneManager.LoadSceneFailure += OnLoadSceneFailure;
-            sceneManager.UnloadSceneSuccess += OnUnloadSceneSuccess;
-            sceneManager.UnloadSceneFailure += OnUnloadSceneFailure;
-#endif
         }
 
         private void Start()
@@ -185,10 +170,8 @@ namespace GameFrameX.Sound.Runtime
 
         private void OnDestroy()
         {
-#if UNITY_5_4_OR_NEWER
             SceneManager.sceneLoaded -= OnSceneLoaded;
             SceneManager.sceneUnloaded -= OnSceneUnloaded;
-#endif
         }
 
         /// <summary>
@@ -690,26 +673,6 @@ namespace GameFrameX.Sound.Runtime
         private void OnPlaySoundUpdate(object sender, PlaySoundUpdateEventArgs eventArgs)
         {
             m_EventComponent.Fire(this, eventArgs);
-        }
-
-        private void OnLoadSceneSuccess(object sender, LoadSceneSuccessEventArgs e)
-        {
-            RefreshAudioListener();
-        }
-
-        private void OnLoadSceneFailure(object sender, LoadSceneFailureEventArgs e)
-        {
-            RefreshAudioListener();
-        }
-
-        private void OnUnloadSceneSuccess(object sender, UnloadSceneSuccessEventArgs e)
-        {
-            RefreshAudioListener();
-        }
-
-        private void OnUnloadSceneFailure(object sender, UnloadSceneFailureEventArgs e)
-        {
-            RefreshAudioListener();
         }
 
         private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode loadSceneMode)
