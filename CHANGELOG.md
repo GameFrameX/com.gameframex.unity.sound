@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.1.1...1.1.2) (2026-05-28)
+
+
+### Bug Fixes
+
+* **ci:** 统一 .github 工作流配置 ([e513ab7](https://github.com/gameframex/com.gameframex.unity.sound/commit/e513ab7b29b988e06c6f61582ab59ca361c961d6))
+* **sound:** 补充 package.json 中缺失的 Entity 包依赖 ([5d6ae02](https://github.com/gameframex/com.gameframex.unity.sound/commit/5d6ae027c70bb5e357140bd2256e0fa36fedd5ca))
+
 ## [1.1.1](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.1.0...1.1.1) (2026-03-16)
 
 
