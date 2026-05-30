@@ -509,7 +509,7 @@ namespace GameFrameX.Sound.Runtime
         /// <returns>声音的序列编号。</returns>
         public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority, PlaySoundParams playSoundParams, Vector3 worldPosition, object userData)
         {
-            return m_SoundManager.PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, SoundPlayContext.Create(null, worldPosition, userData), -1);
+            return m_SoundManager.PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, SoundPlayContext.Create(null, worldPosition, userData), null);
         }
 
         /// <summary>
