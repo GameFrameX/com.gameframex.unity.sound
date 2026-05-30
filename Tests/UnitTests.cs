@@ -1,5 +1,7 @@
 using System;
+using dnlib.DotNet;
 using GameFrameX.Runtime;
+using GameFrameX.Sound.Runtime;
 using NUnit.Framework;
 
 namespace GameFrameX.Sound.Tests
@@ -61,17 +63,17 @@ namespace GameFrameX.Sound.Tests
         public void PlaySoundParams_Create_DefaultsMatchConstants()
         {
             PlaySoundParams sut = PlaySoundParams.Create();
-            Assert.That(sut.Time, Is.EqualTo(Constant.DefaultTime));
-            Assert.That(sut.MuteInSoundGroup, Is.EqualTo(Constant.DefaultMute));
-            Assert.That(sut.Loop, Is.EqualTo(Constant.DefaultLoop));
-            Assert.That(sut.Priority, Is.EqualTo(Constant.DefaultPriority));
-            Assert.That(sut.VolumeInSoundGroup, Is.EqualTo(Constant.DefaultVolume));
-            Assert.That(sut.FadeInSeconds, Is.EqualTo(Constant.DefaultFadeInSeconds));
-            Assert.That(sut.Pitch, Is.EqualTo(Constant.DefaultPitch));
-            Assert.That(sut.PanStereo, Is.EqualTo(Constant.DefaultPanStereo));
-            Assert.That(sut.SpatialBlend, Is.EqualTo(Constant.DefaultSpatialBlend));
-            Assert.That(sut.MaxDistance, Is.EqualTo(Constant.DefaultMaxDistance));
-            Assert.That(sut.DopplerLevel, Is.EqualTo(Constant.DefaultDopplerLevel));
+            Assert.That(sut.Time, Is.EqualTo(0f));
+            Assert.That(sut.MuteInSoundGroup, Is.False);
+            Assert.That(sut.Loop, Is.False);
+            Assert.That(sut.Priority, Is.EqualTo(0));
+            Assert.That(sut.VolumeInSoundGroup, Is.EqualTo(1f));
+            Assert.That(sut.FadeInSeconds, Is.EqualTo(0f));
+            Assert.That(sut.Pitch, Is.EqualTo(1f));
+            Assert.That(sut.PanStereo, Is.EqualTo(0f));
+            Assert.That(sut.SpatialBlend, Is.EqualTo(0f));
+            Assert.That(sut.MaxDistance, Is.EqualTo(100f));
+            Assert.That(sut.DopplerLevel, Is.EqualTo(1f));
             ReferencePool.Release(sut);
         }
 
@@ -144,9 +146,9 @@ namespace GameFrameX.Sound.Tests
 
             sut.Clear();
 
-            Assert.That(sut.Time, Is.EqualTo(Constant.DefaultTime));
-            Assert.That(sut.Priority, Is.EqualTo(Constant.DefaultPriority));
-            Assert.That(sut.VolumeInSoundGroup, Is.EqualTo(Constant.DefaultVolume));
+            Assert.That(sut.Time, Is.EqualTo(0f));
+            Assert.That(sut.Priority, Is.EqualTo(0));
+            Assert.That(sut.VolumeInSoundGroup, Is.EqualTo(1f));
 
             ReferencePool.Release(sut);
         }
@@ -163,7 +165,7 @@ namespace GameFrameX.Sound.Tests
             ReferencePool.Release(first);
 
             PlaySoundParams second = PlaySoundParams.Create();
-            Assert.That(second.Priority, Is.EqualTo(Constant.DefaultPriority), "Clear should reset after Release");
+            Assert.That(second.Priority, Is.EqualTo(0), "Clear should reset after Release");
             Assert.That(second.GetHashCode(), Is.EqualTo(firstHash), "ReferencePool should reuse the same instance");
             ReferencePool.Release(second);
         }

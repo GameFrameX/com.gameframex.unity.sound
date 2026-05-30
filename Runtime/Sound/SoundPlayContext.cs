@@ -38,7 +38,7 @@ namespace GameFrameX.Sound.Runtime
     /// <summary>
     /// 播放声音信息。
     /// </summary>
-    internal sealed class SoundPlayContext : IReference
+    public sealed class SoundPlayContext : IReference
     {
         /// <summary>
         /// 绑定的实体。

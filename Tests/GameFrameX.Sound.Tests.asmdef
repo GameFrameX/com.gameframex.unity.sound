@@ -1,6 +1,8 @@
 {
     "name": "GameFrameX.Sound.Tests",
     "references": [
+        "GameFrameX.Runtime",
+        "GameFrameX.Event.Runtime",
         "GameFrameX.Sound.Runtime"
     ],
     "rootNamespace": "GameFrameX.Sound.Tests",
