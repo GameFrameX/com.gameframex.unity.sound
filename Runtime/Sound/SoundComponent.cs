@@ -545,7 +545,7 @@ namespace GameFrameX.Sound.Runtime
             }
 
             Vector3 worldPos = options.WorldPosition ?? Vector3.zero;
-            return m_SoundManager.PlaySound(soundAssetName, soundGroupName, options.Priority, options.PlaySoundParams, SoundPlayContext.Create(null, worldPos, options.UserData), options.SerialId);
+            return await m_SoundManager.PlaySound(soundAssetName, soundGroupName, options.Priority, options.PlaySoundParams, SoundPlayContext.Create(null, worldPos, options.UserData), options.SerialId);
         }
 
         /// <summary>
