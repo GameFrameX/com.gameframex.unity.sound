@@ -43,7 +43,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置加载声音资源的优先级。默认 <see cref="SoundComponent.DefaultPriority"/>。
         /// </summary>
-        public int Priority { get; set; } = SoundComponent.DefaultPriority;
+        public int Priority { get; set; } = Constant.DefaultPriority;
 
         /// <summary>
         /// 获取或设置播放声音参数。
