@@ -513,6 +513,44 @@ namespace GameFrameX.Sound.Runtime
         }
 
         /// <summary>
+        /// 播放声音（使用参数对象）。替代大量重载方法的统一入口。
+        /// </summary>
+        /// <param name="soundAssetName">声音资源名称。</param>
+        /// <param name="soundGroupName">声音组名称。</param>
+        /// <param name="options">播放声音选项。为 null 时使用默认值。</param>
+        /// <returns>声音的序列编号。</returns>
+        /// <example>
+        /// <code>
+        /// // 使用参数对象播放声音
+        /// await soundComponent.PlaySound("bgm", "music", new SoundPlayOptions
+        /// {
+        ///     Priority = 128,
+        ///     PlaySoundParams = PlaySoundParams.Create(),
+        ///     BindingEntity = entity,
+        ///     UserData = "context"
+        /// });
+        /// </code>
+        /// </example>
+        public async UniTask<int> PlaySound(string soundAssetName, string soundGroupName, SoundPlayOptions options)
+        {
+            if (options == null)
+            {
+                options = new SoundPlayOptions();
+            }
+
+            int serialId = options.SerialId ?? -1;
+
+            // 实体绑定优先于世界坐标
+            if (options.BindingEntity != null)
+            {
+                return await PlaySound(soundAssetName, soundGroupName, options.Priority, options.PlaySoundParams, options.BindingEntity, options.UserData, serialId);
+            }
+
+            Vector3 worldPos = options.WorldPosition ?? Vector3.zero;
+            return PlaySound(soundAssetName, soundGroupName, options.Priority, options.PlaySoundParams, worldPos, options.UserData);
+        }
+
+        /// <summary>
         /// 停止播放声音。
         /// </summary>
         /// <param name="serialId">要停止播放声音的序列编号。</param>
