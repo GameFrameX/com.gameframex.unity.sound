@@ -538,16 +538,14 @@ namespace GameFrameX.Sound.Runtime
                 options = new SoundPlayOptions();
             }
 
-            int serialId = options.SerialId ?? -1;
-
-            // 实体绑定优先于世界坐标
+            // 直接调用 m_SoundManager，传递 int? 避免 -1 回退语义
             if (options.BindingEntity != null)
             {
-                return await PlaySound(soundAssetName, soundGroupName, options.Priority, options.PlaySoundParams, options.BindingEntity, options.UserData, serialId);
+                return await m_SoundManager.PlaySound(soundAssetName, soundGroupName, options.Priority, options.PlaySoundParams, SoundPlayContext.Create(options.BindingEntity, Vector3.zero, options.UserData), options.SerialId);
             }
 
             Vector3 worldPos = options.WorldPosition ?? Vector3.zero;
-            return PlaySound(soundAssetName, soundGroupName, options.Priority, options.PlaySoundParams, worldPos, options.UserData);
+            return m_SoundManager.PlaySound(soundAssetName, soundGroupName, options.Priority, options.PlaySoundParams, SoundPlayContext.Create(null, worldPos, options.UserData), options.SerialId);
         }
 
         /// <summary>
