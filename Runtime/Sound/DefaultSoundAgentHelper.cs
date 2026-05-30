@@ -51,6 +51,7 @@ namespace GameFrameX.Sound.Runtime
         private float m_VolumeWhenPause = 0f;
         private bool m_ApplicationPauseFlag = false;
         private Coroutine m_CurrentCoroutine = null;
+        private bool m_PlayEndedFired = false;
         private EventHandler<ResetSoundAgentEventArgs> m_ResetSoundAgentEventHandler = null;
 
         /// <summary>
@@ -185,6 +186,7 @@ namespace GameFrameX.Sound.Runtime
         public override void Play(float fadeInSeconds)
         {
             StopCurrentCoroutine();
+            m_PlayEndedFired = false;
 
             m_AudioSource.Play();
             if (fadeInSeconds > 0f)
@@ -270,6 +272,7 @@ namespace GameFrameX.Sound.Runtime
         public override void Reset()
         {
             m_IsPause = false;
+            m_PlayEndedFired = false;
             m_CachedTransform.localPosition = Vector3.zero;
             m_AudioSource.clip = null;
             m_BindingEntityLogic = null;
@@ -333,8 +336,9 @@ namespace GameFrameX.Sound.Runtime
 
         private void Update()
         {
-            if (!m_ApplicationPauseFlag && !m_IsPause && !IsPlaying && m_AudioSource.clip != null && m_ResetSoundAgentEventHandler != null)
+            if (!m_ApplicationPauseFlag && !m_IsPause && !IsPlaying && !m_PlayEndedFired && m_AudioSource.clip != null && m_ResetSoundAgentEventHandler != null)
             {
+                m_PlayEndedFired = true;
                 ResetSoundAgentEventArgs resetSoundAgentEventArgs = ResetSoundAgentEventArgs.Create();
                 m_ResetSoundAgentEventHandler(this, resetSoundAgentEventArgs);
                 ReferencePool.Release(resetSoundAgentEventArgs);
