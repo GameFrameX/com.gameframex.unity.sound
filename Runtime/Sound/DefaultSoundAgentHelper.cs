@@ -50,6 +50,7 @@ namespace GameFrameX.Sound.Runtime
         private EntityLogic m_BindingEntityLogic = null;
         private float m_VolumeWhenPause = 0f;
         private bool m_ApplicationPauseFlag = false;
+        private Coroutine m_CurrentCoroutine = null;
         private EventHandler<ResetSoundAgentEventArgs> m_ResetSoundAgentEventHandler = null;
 
         /// <summary>
@@ -183,14 +184,14 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="fadeInSeconds">声音淡入时间，以秒为单位。</param>
         public override void Play(float fadeInSeconds)
         {
-            StopAllCoroutines();
+            StopCurrentCoroutine();
 
             m_AudioSource.Play();
             if (fadeInSeconds > 0f)
             {
                 float volume = m_AudioSource.volume;
                 m_AudioSource.volume = 0f;
-                StartCoroutine(FadeToVolume(m_AudioSource, volume, fadeInSeconds));
+                m_CurrentCoroutine = StartCoroutine(FadeToVolume(m_AudioSource, volume, fadeInSeconds));
             }
         }
 
@@ -200,11 +201,11 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="fadeOutSeconds">声音淡出时间，以秒为单位。</param>
         public override void Stop(float fadeOutSeconds)
         {
-            StopAllCoroutines();
+            StopCurrentCoroutine();
 
             if (fadeOutSeconds > 0f && gameObject.activeInHierarchy)
             {
-                StartCoroutine(StopCo(fadeOutSeconds));
+                m_CurrentCoroutine = StartCoroutine(StopCo(fadeOutSeconds));
             }
             else
             {
@@ -218,12 +219,12 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="fadeOutSeconds">声音淡出时间，以秒为单位。</param>
         public override void Pause(float fadeOutSeconds)
         {
-            StopAllCoroutines();
+            StopCurrentCoroutine();
 
             m_VolumeWhenPause = m_AudioSource.volume;
             if (fadeOutSeconds > 0f && gameObject.activeInHierarchy)
             {
-                StartCoroutine(PauseCo(fadeOutSeconds));
+                m_CurrentCoroutine = StartCoroutine(PauseCo(fadeOutSeconds));
             }
             else
             {
@@ -250,12 +251,12 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="fadeInSeconds">声音淡入时间，以秒为单位。</param>
         public override void Resume(float fadeInSeconds)
         {
-            StopAllCoroutines();
+            StopCurrentCoroutine();
 
             SetPause(false);
             if (fadeInSeconds > 0f)
             {
-                StartCoroutine(FadeToVolume(m_AudioSource, m_VolumeWhenPause, fadeInSeconds));
+                m_CurrentCoroutine = StartCoroutine(FadeToVolume(m_AudioSource, m_VolumeWhenPause, fadeInSeconds));
             }
             else
             {
@@ -377,6 +378,15 @@ namespace GameFrameX.Sound.Runtime
         {
             yield return FadeToVolume(m_AudioSource, 0f, fadeOutSeconds);
             SetPause(true);
+        }
+
+        private void StopCurrentCoroutine()
+        {
+            if (m_CurrentCoroutine != null)
+            {
+                StopCoroutine(m_CurrentCoroutine);
+                m_CurrentCoroutine = null;
+            }
         }
 
         private IEnumerator FadeToVolume(AudioSource audioSource, float volume, float duration)
