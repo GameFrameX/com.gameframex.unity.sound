@@ -3,6 +3,7 @@
     "references": [
         "GameFrameX.Runtime",
         "GameFrameX.Event.Runtime",
+        "GameFrameX.Entity.Runtime",
         "GameFrameX.Sound.Runtime"
     ],
     "rootNamespace": "GameFrameX.Sound.Tests",
