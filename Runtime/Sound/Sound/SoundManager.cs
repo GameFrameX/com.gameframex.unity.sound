@@ -510,7 +510,16 @@ namespace GameFrameX.Sound.Runtime
                 LoadAssetSuccessCallback(soundAssetName, assetObject, assetHandle.Duration, PlaySoundInfo.Create(newSerialId, soundGroup, playSoundParams, userData));
             }
 
-            assetOperationHandle.Completed += OnAssetOperationHandleOnCompleted;
+            // 检查是否已同步完成（如缓存命中），避免 Completed 事件在注册前已触发
+            if (assetOperationHandle.IsDone)
+            {
+                OnAssetOperationHandleOnCompleted(assetOperationHandle);
+            }
+            else
+            {
+                assetOperationHandle.Completed += OnAssetOperationHandleOnCompleted;
+            }
+
             return newSerialId;
         }
 
