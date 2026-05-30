@@ -12,7 +12,7 @@ namespace GameFrameX.Sound.Runtime
             _ = typeof(DefaultSoundAgentHelper);
             _ = typeof(DefaultSoundGroupHelper);
             _ = typeof(DefaultSoundHelper);
-            _ = typeof(PlaySoundInfo);
+            _ = typeof(SoundPlayContext);
             _ = typeof(SoundAgentHelperBase);
             _ = typeof(SoundComponent);
             _ = typeof(SoundGroupHelperBase);

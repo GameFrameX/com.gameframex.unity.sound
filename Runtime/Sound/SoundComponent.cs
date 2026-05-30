@@ -480,7 +480,7 @@ namespace GameFrameX.Sound.Runtime
         /// <returns>声音的序列编号。</returns>
         public async UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority, PlaySoundParams playSoundParams, Entity.Runtime.Entity bindingEntity, object userData, int serialId)
         {
-            return await m_SoundManager.PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, PlaySoundInfo.Create(bindingEntity, Vector3.zero, userData), serialId);
+            return await m_SoundManager.PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, SoundPlayContext.Create(bindingEntity, Vector3.zero, userData), serialId);
         }
 
         /// <summary>
@@ -509,7 +509,7 @@ namespace GameFrameX.Sound.Runtime
         /// <returns>声音的序列编号。</returns>
         public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority, PlaySoundParams playSoundParams, Vector3 worldPosition, object userData)
         {
-            return m_SoundManager.PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, PlaySoundInfo.Create(null, worldPosition, userData), -1);
+            return m_SoundManager.PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, SoundPlayContext.Create(null, worldPosition, userData), -1);
         }
 
         /// <summary>
@@ -637,7 +637,7 @@ namespace GameFrameX.Sound.Runtime
 
         private void OnPlaySoundSuccess(object sender, PlaySoundSuccessEventArgs eventArgs)
         {
-            PlaySoundInfo playSoundInfo = (PlaySoundInfo)eventArgs.UserData;
+            SoundPlayContext playSoundInfo = (SoundPlayContext)eventArgs.UserData;
             if (playSoundInfo != null)
             {
                 SoundAgentHelperBase soundAgentHelper = (SoundAgentHelperBase)eventArgs.SoundAgent.Helper;

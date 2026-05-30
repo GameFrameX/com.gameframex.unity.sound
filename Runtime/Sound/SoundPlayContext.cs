@@ -38,7 +38,7 @@ namespace GameFrameX.Sound.Runtime
     /// <summary>
     /// 播放声音信息。
     /// </summary>
-    internal sealed class PlaySoundInfo : IReference
+    internal sealed class SoundPlayContext : IReference
     {
         /// <summary>
         /// 绑定的实体。
@@ -58,7 +58,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 初始化播放声音信息的新实例。
         /// </summary>
-        public PlaySoundInfo()
+        public SoundPlayContext()
         {
             m_BindingEntity = null;
             m_WorldPosition = Vector3.zero;
@@ -96,9 +96,9 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="worldPosition">声音在世界空间中的位置。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>创建的播放声音信息。</returns>
-        public static PlaySoundInfo Create(Entity.Runtime.Entity bindingEntity, Vector3 worldPosition, object userData)
+        public static SoundPlayContext Create(Entity.Runtime.Entity bindingEntity, Vector3 worldPosition, object userData)
         {
-            PlaySoundInfo playSoundInfo = ReferencePool.Acquire<PlaySoundInfo>();
+            SoundPlayContext playSoundInfo = ReferencePool.Acquire<SoundPlayContext>();
             playSoundInfo.m_BindingEntity = bindingEntity;
             playSoundInfo.m_WorldPosition = worldPosition;
             playSoundInfo.m_UserData = userData;
