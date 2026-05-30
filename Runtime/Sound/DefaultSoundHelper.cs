@@ -48,7 +48,10 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundAsset">要释放的声音资源。</param>
         public override void ReleaseSoundAsset(object soundAsset)
         {
-            // m_ResourceComponent.UnloadAsset(soundAsset);
+            if (soundAsset is UnityEngine.Object unityObject)
+            {
+                UnityEngine.Resources.UnloadAsset(unityObject);
+            }
         }
 
         private void Start()
