@@ -133,6 +133,9 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         public static readonly string EventId = typeof(PlaySoundFailureEventArgs).FullName;
 
-        public override string Id => EventId;
+        public override string Id
+        {
+            get { return EventId; }
+        }
     }
 }
