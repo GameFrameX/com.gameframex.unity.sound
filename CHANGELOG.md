@@ -1,3 +1,24 @@
+# [1.2.0](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.1.2...1.2.0) (2026-06-01)
+
+
+### Bug Fixes
+
+* **sound:** 修复测试编译错误 ([9fa9a2f](https://github.com/gameframex/com.gameframex.unity.sound/commit/9fa9a2f848e04745919eba913df696628ae83e1f))
+* **sound:** 取消注释 EventArgs 的 ReferencePool.Release 调用 ([1ceded7](https://github.com/gameframex/com.gameframex.unity.sound/commit/1ceded713d562c4a8c80c51422a8cd01357b0784))
+* **sound:** 同步 ISoundManager 接口与 int? serialId ([7fe45dc](https://github.com/gameframex/com.gameframex.unity.sound/commit/7fe45dc65c8c17f16bf01a7187aa9490b681de58))
+* **sound:** 处理 PlaySound 异步回调中的同步完成情况 ([8f8faea](https://github.com/gameframex/com.gameframex.unity.sound/commit/8f8faea7195535b6178b9ff1d4f6e3a3af501c62))
+* **sound:** 将 GameFrameX.Entity.Runtime 添加到测试 asmdef ([d481507](https://github.com/gameframex/com.gameframex.unity.sound/commit/d481507f2f0e01a004769b386e309526179c4b93))
+* **sound:** 恢复 ReleaseSoundAsset 实现 ([81eb379](https://github.com/gameframex/com.gameframex.unity.sound/commit/81eb379e520939199bc758effbf94515b74f29f1))
+* **sound:** 用 Constant.DefaultPriority 替换 SoundComponent.DefaultPriority ([04fe62d](https://github.com/gameframex/com.gameframex.unity.sound/commit/04fe62d7a7f04a08308aaa6f87893b938f02e825))
+* **sound:** 用精确的 StopCoroutine 替换 StopAllCoroutines ([c7a13ab](https://github.com/gameframex/com.gameframex.unity.sound/commit/c7a13abf4ded17a35e9d1b34bf1104e850cea83b))
+* **sound:** 补充 SoundPlayOptions 重载中缺失的 await ([c070540](https://github.com/gameframex/com.gameframex.unity.sound/commit/c070540adee8c1add47aef64d9480fd0867270ac))
+* **sound:** 防止 Update 中重复触发 ResetSoundAgent 事件 ([d6bdb77](https://github.com/gameframex/com.gameframex.unity.sound/commit/d6bdb778c309900020a56c6545ebb9f60eb51f93))
+
+
+### Features
+
+* **sound:** 添加 SoundPlayOptions 参数对象 ([4caa256](https://github.com/gameframex/com.gameframex.unity.sound/commit/4caa25622e507319bfe834118d834b7027f9c00a))
+
 ## [1.1.2](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.1.1...1.1.2) (2026-05-28)
 
 
