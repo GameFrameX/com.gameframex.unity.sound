@@ -17,15 +17,15 @@
 </p>
 
 <p align="center">
-  独立游戏前后端一体化解决方案 · 独立游戏开发者的圆梦大使
+  独立游戏开发一站式解决方案 · 助力独立开发者实现梦想
 </p>
 
 <p align="center">
   <a href="https://gameframex.doc.alianblank.com">文档</a> ·
   <a href="#快速开始">快速开始</a> ·
-  <a href="https://qm.qq.com/q/3dIpogITg">QQ群</a> ·
-  语言: <a href="README.md">English</a> ·
-  **简体中文** ·
+  <a href="https://qm.qq.com/q/3dIpogITg">QQ 群</a> ·
+  <a href="README.md">English</a> ·
+  Language: **简体中文** ·
   <a href="README.zh-TW.md">繁體中文</a> ·
   <a href="README.ja.md">日本語</a> ·
   <a href="README.ko.md">한국어</a>
@@ -33,44 +33,124 @@
 
 ---
 
-## 项目简介
+## 功能特性
 
-GameFrameX.Sound 是 GameFrameX 框架的声音管理组件。提供音频播放、暂停、停止、音量控制等常用音频操作。支持 MP3、WAV、OGG 等多种音频格式，采用现代 C# async/await 模式，使音频操作更加简单高效。
+- **声音分组** — 将声音组织为命名分组（BGM、SFX、Voice 等），每组拥有独立的音量、静音和代理数量设置
+- **优先级播放** — 通过 UniTask 实现异步播放，当所有代理忙碌时自动驱逐低优先级声音
+- **完整生命周期控制** — 播放、停止、暂停、恢复，支持可选的淡入/淡出时长
+- **空间音频** — 将声音绑定到游戏实体，或放置在指定的世界坐标位置
+- **AudioMixer 集成** — 将声音分组路由到特定的 AudioMixer 分组，实现精细化混音
+- **事件驱动通知** — 通过 GameFrameX 事件系统分发播放成功、失败和更新事件
+- **引用池化** — 所有事件参数和播放参数均使用引用池，最小化 GC 分配
 
 ## 快速开始
 
 ### 安装方式（任选其一）
 
-1. 直接在 `manifest.json` 的 `dependencies` 节点下添加以下内容：
+1. 添加到 `manifest.json` 依赖中：
    ```json
    {"com.gameframex.unity.sound": "https://github.com/GameFrameX/com.gameframex.unity.sound.git"}
    ```
 
-2. 在 Unity 的 `Packages Manager` 中使用 `Git URL` 的方式添加库，地址为：https://github.com/GameFrameX/com.gameframex.unity.sound.git
+2. Unity Package Manager → `Add package from git URL`：https://github.com/GameFrameX/com.gameframex.unity.sound.git
 
-3. 直接下载仓库放置到 Unity 项目的 `Packages` 目录下，会自动加载识别。
+3. 下载并放置到项目的 `Packages` 目录中。
 
-### 使用示例
+### 基本用法
 
 ```csharp
-// 获取声音组件
-var soundComponent = GameEntry.GetComponent<SoundComponent>();
+var sound = GameEntry.GetComponent<SoundComponent>();
 
-// 播放音频
-soundComponent.PlaySound("audio_path", "audio_group");
+// 在 "BGM" 分组中播放声音
+int serialId = await sound.PlaySound("Assets/Audio/bgm.mp3", "BGM");
 
-// 停止音频
-soundComponent.StopSound("audio_path");
+// 带淡出效果停止
+sound.StopSound(serialId, fadeOutSeconds: 1f);
 
-// 暂停音频
-soundComponent.PauseSound("audio_path");
+// 暂停 / 恢复
+sound.PauseSound(serialId);
+sound.ResumeSound(serialId, fadeInSeconds: 0.5f);
 
-// 恢复音频
-soundComponent.ResumeSound("audio_path");
-
-// 设置音量
-soundComponent.SetVolume("audio_group", 0.5f);
+// 设置分组音量
+sound.SetVolume("BGM", 0.5f);
 ```
+
+### 使用 SoundPlayOptions
+
+对于复杂的播放请求，可以使用 `SoundPlayOptions` 代替匹配特定的重载方法：
+
+```csharp
+int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
+    new SoundPlayOptions
+    {
+        Loop = false,
+        Volume = 0.8f,
+        Priority = 5,
+        BindingEntity = enemyEntity,
+        FadeInSeconds = 0.2f,
+        Pitch = 1.2f,
+        SpatialBlend = 1.0f
+    });
+```
+
+### 空间音频
+
+```csharp
+// 绑定到实体 — AudioSource 跟随实体的 Transform
+int serialId = await sound.PlaySound("Assets/Audio/footstep.mp3", "SFX",
+    bindingEntity: playerEntity);
+
+// 在世界坐标位置播放
+int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
+    worldPosition: explosionPos);
+```
+
+### 监听事件
+
+```csharp
+// 通过 EventComponent 订阅
+var eventComponent = GameEntry.GetComponent<EventComponent>();
+eventComponent.Subscribe(PlaySoundSuccessEventArgs.EventId, OnPlaySuccess);
+eventComponent.Subscribe(PlaySoundFailureEventArgs.EventId, OnPlayFailure);
+
+void OnPlaySuccess(object sender, GameEventArgs e)
+{
+    var args = (PlaySoundSuccessEventArgs)e;
+    Debug.Log($"声音播放中：{args.SoundAssetName}，时长：{args.Duration}s");
+}
+
+void OnPlayFailure(object sender, GameEventArgs e)
+{
+    var args = (PlaySoundFailureEventArgs)e;
+    Debug.LogWarning($"声音播放失败：{args.SoundAssetName}，错误：{args.ErrorMessage}");
+}
+```
+
+## 架构
+
+```
+SoundComponent (MonoBehaviour)
+ └── SoundManager (引擎无关的逻辑层)
+      └── SoundGroup (命名分组：BGM, SFX, ...)
+           └── SoundAgent (单个发声通道)
+                └── SoundAgentHelper (AudioSource 封装)
+```
+
+| 概念 | 说明 |
+|------|------|
+| **SoundGroup** | 代理的命名集合。每个分组拥有独立的音量、静音状态和可配置的代理数量。 |
+| **SoundAgent** | 表示一个并发发声通道。每组的代理数量决定了可同时播放的声音数量。 |
+| **SoundPlayContext** | 承载播放请求的绑定实体、世界坐标和用户数据。 |
+| **PlaySoundParams** | 池化的音频属性参数对象（音量、音调、淡入淡出、空间混合等）。 |
+
+## 依赖
+
+| 包 | 说明 |
+|----|------|
+| `com.gameframex.unity` | 核心框架（模块系统、引用池、工具类） |
+| `com.gameframex.unity.asset` | 资源加载（YooAsset 集成） |
+| `com.gameframex.unity.entity` | 实体系统，用于空间音频绑定 |
+| `com.gameframex.unity.event` | 事件系统，用于播放通知 |
 
 ## 文档与资源
 
@@ -78,12 +158,12 @@ soundComponent.SetVolume("audio_group", 0.5f);
 
 ## 社区与支持
 
-- QQ群: [加入](https://qm.qq.com/q/3dIpogITg)
+- QQ 群：[加入](https://qm.qq.com/q/3dIpogITg)
 
 ## 更新日志
 
 查看 [Releases](https://github.com/GameFrameX/com.gameframex.unity.sound/releases) 了解更新日志。
 
-## 开源协议
+## 许可证
 
-本项目基于 MIT 协议开源 - 详见 [LICENSE](https://github.com/GameFrameX/com.gameframex.unity.sound/blob/main/LICENSE) 文件。
+本项目基于 MIT 许可证开源，详情请参见 [LICENSE](LICENSE.md) 文件。

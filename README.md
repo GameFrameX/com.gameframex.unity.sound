@@ -33,44 +33,124 @@
 
 ---
 
-## Project Overview
+## Features
 
-GameFrameX.Sound is the Sound component for the GameFrameX framework. It provides audio playback, pause, stop, volume control, and other common audio operations. It supports multiple audio formats including MP3, WAV, OGG, and uses modern C# async/await patterns for efficient audio management.
+- **Sound Groups** — Organize sounds into named groups (BGM, SFX, Voice, etc.) with independent volume, mute, and agent count settings
+- **Priority-based Playback** — Async playback via UniTask with automatic low-priority eviction when all agents are busy
+- **Full Lifecycle Control** — Play, stop, pause, resume with optional fade-in/fade-out durations
+- **Spatial Audio** — Bind sounds to game entities or place them at specific world positions
+- **AudioMixer Integration** — Route sound groups to specific AudioMixer groups for fine-grained mixing
+- **Event-driven Notifications** — Success, failure, and update events dispatched through the GameFrameX Event system
+- **Reference Pooling** — All event args and play parameters are pooled to minimize GC allocation
 
 ## Quick Start
 
 ### Installation (choose one)
 
-1. Add the following to the `dependencies` section of your `manifest.json`:
+1. Add to `manifest.json` dependencies:
    ```json
    {"com.gameframex.unity.sound": "https://github.com/GameFrameX/com.gameframex.unity.sound.git"}
    ```
 
-2. In Unity's Package Manager, use `Git URL` to add the package: https://github.com/GameFrameX/com.gameframex.unity.sound.git
+2. Unity Package Manager → `Add package from git URL`: https://github.com/GameFrameX/com.gameframex.unity.sound.git
 
-3. Download the repository and place it in your Unity project's `Packages` directory. It will be loaded automatically.
+3. Download and place in your project's `Packages` directory.
 
-### Usage
+### Basic Usage
 
 ```csharp
-// Get the Sound component
-var soundComponent = GameEntry.GetComponent<SoundComponent>();
+var sound = GameEntry.GetComponent<SoundComponent>();
 
-// Play audio
-soundComponent.PlaySound("audio_path", "audio_group");
+// Play a sound in the "BGM" group
+int serialId = await sound.PlaySound("Assets/Audio/bgm.mp3", "BGM");
 
-// Stop audio
-soundComponent.StopSound("audio_path");
+// Stop with fade-out
+sound.StopSound(serialId, fadeOutSeconds: 1f);
 
-// Pause audio
-soundComponent.PauseSound("audio_path");
+// Pause / Resume
+sound.PauseSound(serialId);
+sound.ResumeSound(serialId, fadeInSeconds: 0.5f);
 
-// Resume audio
-soundComponent.ResumeSound("audio_path");
-
-// Set volume
-soundComponent.SetVolume("audio_group", 0.5f);
+// Set group volume
+sound.SetVolume("BGM", 0.5f);
 ```
+
+### Using SoundPlayOptions
+
+For complex play requests, use `SoundPlayOptions` instead of matching a specific overload:
+
+```csharp
+int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
+    new SoundPlayOptions
+    {
+        Loop = false,
+        Volume = 0.8f,
+        Priority = 5,
+        BindingEntity = enemyEntity,
+        FadeInSeconds = 0.2f,
+        Pitch = 1.2f,
+        SpatialBlend = 1.0f
+    });
+```
+
+### Spatial Audio
+
+```csharp
+// Bind to an entity — AudioSource follows the entity's transform
+int serialId = await sound.PlaySound("Assets/Audio/footstep.mp3", "SFX",
+    bindingEntity: playerEntity);
+
+// Play at a world position
+int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
+    worldPosition: explosionPos);
+```
+
+### Listening to Events
+
+```csharp
+// Subscribe via EventComponent
+var eventComponent = GameEntry.GetComponent<EventComponent>();
+eventComponent.Subscribe(PlaySoundSuccessEventArgs.EventId, OnPlaySuccess);
+eventComponent.Subscribe(PlaySoundFailureEventArgs.EventId, OnPlayFailure);
+
+void OnPlaySuccess(object sender, GameEventArgs e)
+{
+    var args = (PlaySoundSuccessEventArgs)e;
+    Debug.Log($"Sound playing: {args.SoundAssetName}, duration: {args.Duration}s");
+}
+
+void OnPlayFailure(object sender, GameEventArgs e)
+{
+    var args = (PlaySoundFailureEventArgs)e;
+    Debug.LogWarning($"Sound failed: {args.SoundAssetName}, error: {args.ErrorMessage}");
+}
+```
+
+## Architecture
+
+```
+SoundComponent (MonoBehaviour)
+ └── SoundManager (engine-agnostic logic)
+      └── SoundGroup (named group: BGM, SFX, ...)
+           └── SoundAgent (single voice slot)
+                └── SoundAgentHelper (AudioSource wrapper)
+```
+
+| Concept | Description |
+|---------|-------------|
+| **SoundGroup** | A named collection of agents. Each group has its own volume, mute state, and configurable agent count. |
+| **SoundAgent** | Represents one concurrent voice. The number of agents per group determines how many sounds can play simultaneously. |
+| **SoundPlayContext** | Carries binding entity, world position, and user data for a play request. |
+| **PlaySoundParams** | Pooled parameter object for audio properties (volume, pitch, fade, spatial blend, etc.). |
+
+## Dependencies
+
+| Package | Description |
+|---------|-------------|
+| `com.gameframex.unity` | Core framework (module system, reference pool, utilities) |
+| `com.gameframex.unity.asset` | Asset loading (YooAsset integration) |
+| `com.gameframex.unity.entity` | Entity system for spatial audio binding |
+| `com.gameframex.unity.event` | Event system for playback notifications |
 
 ## Documentation & Resources
 
@@ -86,4 +166,4 @@ See [Releases](https://github.com/GameFrameX/com.gameframex.unity.sound/releases
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/GameFrameX/com.gameframex.unity.sound/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
