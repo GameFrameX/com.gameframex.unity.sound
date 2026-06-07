@@ -1,38 +1,24 @@
-<p align="center">
-  <img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="GameFrameX Logo" width="160" />
-</p>
+<div align="center">
 
-<h1 align="center">GameFrameX Sound</h1>
+<img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="Game Frame X Logo" width="160" />
 
-<p align="center">
-  <a href="https://github.com/GameFrameX/com.gameframex.unity.sound/releases">
-    <img src="https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.sound?style=flat-square" alt="Version" />
-  </a>
-  <a href="https://github.com/GameFrameX/com.gameframex.unity.sound/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/GameFrameX/com.gameframex.unity.sound?style=flat-square" alt="License" />
-  </a>
-  <a href="https://gameframex.doc.alianblank.com">
-    <img src="https://img.shields.io/badge/Documentation-online-blue?style=flat-square" alt="Documentation" />
-  </a>
-</p>
+# GameFrameX Sound
 
-<p align="center">
-  인디 게임 개발을 위한 올인원 솔루션 · 인디 개발자의 꿈을 실현합니다
-</p>
+[![License](https://img.shields.io/github/license/GameFrameX/com.gameframex.unity.sound)](https://github.com/GameFrameX/com.gameframex.unity.sound/blob/main/LICENSE.md)
+[![Version](https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.sound)](https://github.com/GameFrameX/com.gameframex.unity.sound/releases)
+[![Documentation](https://img.shields.io/badge/Documentation-docs-blue)](https://gameframex.doc.alianblank.com)
 
-<p align="center">
-  <a href="https://gameframex.doc.alianblank.com">문서</a> ·
-  <a href="#quick-start">빠른 시작</a> ·
-  <a href="https://qm.qq.com/q/3dIpogITg">QQ 그룹</a> ·
-  <a href="README.md">English</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.zh-TW.md">繁體中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  Language: **한국어**
-</p>
+인디 게임 개발자를 위한 올인원 솔루션 · 인디 개발자의 꿈을 실현
 
----
+<br />
 
+[문서](https://gameframex.doc.alianblank.com) · [빠른 시작](#quick-start) · [QQ 그룹](https://qm.qq.com/q/3dIpogITg)
+
+<br />
+
+[English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | **한국어**
+
+</div>
 ## 기능
 
 - **사운드 그룹** — 사운드를 명명된 그룹(BGM, SFX, Voice 등)으로 구성하며, 독립적인 볼륨, 음소거 및 에이전트 수 설정을 지원합니다
