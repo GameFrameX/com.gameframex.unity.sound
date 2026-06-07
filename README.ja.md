@@ -101,6 +101,15 @@ SoundComponent (MonoBehaviour)
 
 変更履歴については [Releases](https://github.com/GameFrameX/com.gameframex.unity.sound/releases) をご覧ください。
 
+
+## 依存関係
+
+| パッケージ | 説明 |
+|----------|------|
+| `com.gameframex.unity` | 1.1.1 |
+| `com.gameframex.unity.asset` | 1.0.6 |
+| `com.gameframex.unity.entity` | 2.4.1 |
+| `com.gameframex.unity.event` | 1.0.0 |
 ## ライセンス
 
 詳しくは [LICENSE.md](LICENSE.md) をご参照ください。

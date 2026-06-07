@@ -101,6 +101,19 @@ SoundComponent (MonoBehaviour)
 
 변경 이력은 [Releases](https://github.com/GameFrameX/com.gameframex.unity.sound/releases)를 참조하세요.
 
+
+## 의존성
+
+| 패키지 | 설명 |
+|--------|------|
+| `com.gameframex.unity` | 1.1.1 |
+| `com.gameframex.unity.asset` | 1.0.6 |
+| `com.gameframex.unity.entity` | 2.4.1 |
+| `com.gameframex.unity.event` | 1.0.0 |
+
+## 변경 로그
+
+[Releases](https://github.com/GameFrameX/gameframex/com.gameframex.unity.sound/releases)에서 변경 로그를 확인하세요.
 ## 라이선스
 
 자세한 내용은 [LICENSE.md](LICENSE.md) 파일을 참조하세요.
