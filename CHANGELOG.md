@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.2.0...1.2.1) (2026-06-07)
+
+
+### Bug Fixes
+
+* 补全包规范文件（LICENSE/CHANGELOG/URL 字段/unity 字段） ([688bac6](https://github.com/gameframex/com.gameframex.unity.sound/commit/688bac62000c48157d9cc1726076aef677dca867))
+
 # [1.2.0](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.1.2...1.2.0) (2026-06-01)
 
 
