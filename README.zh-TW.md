@@ -33,86 +33,36 @@
 
 ## 快速開始
 
-### 安裝（選擇一種方式）
+### 安裝
 
-1. 在 `manifest.json` 的 dependencies 中新增：
-   ```json
-   {"com.gameframex.unity.sound": "https://github.com/GameFrameX/com.gameframex.unity.sound.git"}
-   ```
+編輯 Unity 專案的 `Packages/manifest.json`，添加 `scopedRegistries` 部分：
 
-2. Unity Package Manager → `Add package from git URL`：https://github.com/GameFrameX/com.gameframex.unity.sound.git
-
-3. 下載後放入專案的 `Packages` 目錄中。
-
-### 基本用法
-
-```csharp
-var sound = GameEntry.GetComponent<SoundComponent>();
-
-// 在 "BGM" 分組中播放音效
-int serialId = await sound.PlaySound("Assets/Audio/bgm.mp3", "BGM");
-
-// 帶淡出效果停止
-sound.StopSound(serialId, fadeOutSeconds: 1f);
-
-// 暫停 / 恢復
-sound.PauseSound(serialId);
-sound.ResumeSound(serialId, fadeInSeconds: 0.5f);
-
-// 設定分組音量
-sound.SetVolume("BGM", 0.5f);
-```
-
-### 使用 SoundPlayOptions
-
-對於複雜的播放請求，可以使用 `SoundPlayOptions` 代替匹配特定的方法多載：
-
-```csharp
-int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
-    new SoundPlayOptions
+```json
+{
+  "scopedRegistries": [
     {
-        Loop = false,
-        Volume = 0.8f,
-        Priority = 5,
-        BindingEntity = enemyEntity,
-        FadeInSeconds = 0.2f,
-        Pitch = 1.2f,
-        SpatialBlend = 1.0f
-    });
-```
-
-### 空間音訊
-
-```csharp
-// 綁定到實體 — AudioSource 會跟隨實體的 Transform
-int serialId = await sound.PlaySound("Assets/Audio/footstep.mp3", "SFX",
-    bindingEntity: playerEntity);
-
-// 在世界座標位置播放
-int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
-    worldPosition: explosionPos);
-```
-
-### 監聽事件
-
-```csharp
-// 透過 EventComponent 訂閱
-var eventComponent = GameEntry.GetComponent<EventComponent>();
-eventComponent.Subscribe(PlaySoundSuccessEventArgs.EventId, OnPlaySuccess);
-eventComponent.Subscribe(PlaySoundFailureEventArgs.EventId, OnPlayFailure);
-
-void OnPlaySuccess(object sender, GameEventArgs e)
-{
-    var args = (PlaySoundSuccessEventArgs)e;
-    Debug.Log($"音效播放中：{args.SoundAssetName}，時長：{args.Duration}s");
-}
-
-void OnPlayFailure(object sender, GameEventArgs e)
-{
-    var args = (PlaySoundFailureEventArgs)e;
-    Debug.LogWarning($"音效播放失敗：{args.SoundAssetName}，錯誤：{args.ErrorMessage}");
+      "name": "GameFrameX",
+      "url": "https://gameframex.upm.alianblank.uk",
+      "scopes": [
+        "com.gameframex"
+      ]
+    }
+  ]
 }
 ```
+
+`scopes` 控制哪些套件透過此註冊表解析。只有以 `com.gameframex` 開頭的套件才會從這個註冊表取得。
+
+Then add the package to `dependencies`:
+
+```json
+{
+  "dependencies": {
+    "com.gameframex.unity.sound": "1.2.0"
+  }
+}
+```
+
 
 ## 架構
 

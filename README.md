@@ -33,86 +33,36 @@ All-in-One Solution for Indie Game Development · Empowering Indie Developers' D
 
 ## Quick Start
 
-### Installation (choose one)
+### Installation
 
-1. Add to `manifest.json` dependencies:
-   ```json
-   {"com.gameframex.unity.sound": "https://github.com/GameFrameX/com.gameframex.unity.sound.git"}
-   ```
+Edit your Unity project's `Packages/manifest.json` and add the `scopedRegistries` section:
 
-2. Unity Package Manager → `Add package from git URL`: https://github.com/GameFrameX/com.gameframex.unity.sound.git
-
-3. Download and place in your project's `Packages` directory.
-
-### Basic Usage
-
-```csharp
-var sound = GameEntry.GetComponent<SoundComponent>();
-
-// Play a sound in the "BGM" group
-int serialId = await sound.PlaySound("Assets/Audio/bgm.mp3", "BGM");
-
-// Stop with fade-out
-sound.StopSound(serialId, fadeOutSeconds: 1f);
-
-// Pause / Resume
-sound.PauseSound(serialId);
-sound.ResumeSound(serialId, fadeInSeconds: 0.5f);
-
-// Set group volume
-sound.SetVolume("BGM", 0.5f);
-```
-
-### Using SoundPlayOptions
-
-For complex play requests, use `SoundPlayOptions` instead of matching a specific overload:
-
-```csharp
-int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
-    new SoundPlayOptions
+```json
+{
+  "scopedRegistries": [
     {
-        Loop = false,
-        Volume = 0.8f,
-        Priority = 5,
-        BindingEntity = enemyEntity,
-        FadeInSeconds = 0.2f,
-        Pitch = 1.2f,
-        SpatialBlend = 1.0f
-    });
-```
-
-### Spatial Audio
-
-```csharp
-// Bind to an entity — AudioSource follows the entity's transform
-int serialId = await sound.PlaySound("Assets/Audio/footstep.mp3", "SFX",
-    bindingEntity: playerEntity);
-
-// Play at a world position
-int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
-    worldPosition: explosionPos);
-```
-
-### Listening to Events
-
-```csharp
-// Subscribe via EventComponent
-var eventComponent = GameEntry.GetComponent<EventComponent>();
-eventComponent.Subscribe(PlaySoundSuccessEventArgs.EventId, OnPlaySuccess);
-eventComponent.Subscribe(PlaySoundFailureEventArgs.EventId, OnPlayFailure);
-
-void OnPlaySuccess(object sender, GameEventArgs e)
-{
-    var args = (PlaySoundSuccessEventArgs)e;
-    Debug.Log($"Sound playing: {args.SoundAssetName}, duration: {args.Duration}s");
-}
-
-void OnPlayFailure(object sender, GameEventArgs e)
-{
-    var args = (PlaySoundFailureEventArgs)e;
-    Debug.LogWarning($"Sound failed: {args.SoundAssetName}, error: {args.ErrorMessage}");
+      "name": "GameFrameX",
+      "url": "https://gameframex.upm.alianblank.uk",
+      "scopes": [
+        "com.gameframex"
+      ]
+    }
+  ]
 }
 ```
+
+`scopes` controls which packages are resolved through this registry. Only packages whose names start with `com.gameframex` will be fetched from it.
+
+Then add the package to `dependencies`:
+
+```json
+{
+  "dependencies": {
+    "com.gameframex.unity.sound": "1.2.0"
+  }
+}
+```
+
 
 ## Architecture
 

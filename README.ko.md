@@ -33,86 +33,36 @@
 
 ## 빠른 시작
 
-### 설치 (택 1)
+### 설치
 
-1. `manifest.json` 종속성에 추가:
-   ```json
-   {"com.gameframex.unity.sound": "https://github.com/GameFrameX/com.gameframex.unity.sound.git"}
-   ```
+Unity 프로젝트의 `Packages/manifest.json`을 편집하여 `scopedRegistries` 섹션을 추가하세요:
 
-2. Unity Package Manager → `Add package from git URL`: https://github.com/GameFrameX/com.gameframex.unity.sound.git
-
-3. 다운로드하여 프로젝트의 `Packages` 디렉토리에 배치합니다.
-
-### 기본 사용법
-
-```csharp
-var sound = GameEntry.GetComponent<SoundComponent>();
-
-// "BGM" 그룹에서 사운드 재생
-int serialId = await sound.PlaySound("Assets/Audio/bgm.mp3", "BGM");
-
-// 페이드아웃으로 정지
-sound.StopSound(serialId, fadeOutSeconds: 1f);
-
-// 일시정지 / 재개
-sound.PauseSound(serialId);
-sound.ResumeSound(serialId, fadeInSeconds: 0.5f);
-
-// 그룹 볼륨 설정
-sound.SetVolume("BGM", 0.5f);
-```
-
-### SoundPlayOptions 사용
-
-복잡한 재생 요청의 경우 특정 오버로드 대신 `SoundPlayOptions`를 사용하세요:
-
-```csharp
-int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
-    new SoundPlayOptions
+```json
+{
+  "scopedRegistries": [
     {
-        Loop = false,
-        Volume = 0.8f,
-        Priority = 5,
-        BindingEntity = enemyEntity,
-        FadeInSeconds = 0.2f,
-        Pitch = 1.2f,
-        SpatialBlend = 1.0f
-    });
-```
-
-### 공간 오디오
-
-```csharp
-// 엔티티에 바인딩 — AudioSource가 엔티티의 Transform을 따라갑니다
-int serialId = await sound.PlaySound("Assets/Audio/footstep.mp3", "SFX",
-    bindingEntity: playerEntity);
-
-// 월드 위치에서 재생
-int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
-    worldPosition: explosionPos);
-```
-
-### 이벤트 수신
-
-```csharp
-// EventComponent를 통해 구독
-var eventComponent = GameEntry.GetComponent<EventComponent>();
-eventComponent.Subscribe(PlaySoundSuccessEventArgs.EventId, OnPlaySuccess);
-eventComponent.Subscribe(PlaySoundFailureEventArgs.EventId, OnPlayFailure);
-
-void OnPlaySuccess(object sender, GameEventArgs e)
-{
-    var args = (PlaySoundSuccessEventArgs)e;
-    Debug.Log($"Sound playing: {args.SoundAssetName}, duration: {args.Duration}s");
-}
-
-void OnPlayFailure(object sender, GameEventArgs e)
-{
-    var args = (PlaySoundFailureEventArgs)e;
-    Debug.LogWarning($"Sound failed: {args.SoundAssetName}, error: {args.ErrorMessage}");
+      "name": "GameFrameX",
+      "url": "https://gameframex.upm.alianblank.uk",
+      "scopes": [
+        "com.gameframex"
+      ]
+    }
+  ]
 }
 ```
+
+`scopes`는 이 레지스트리를 통해 어떤 패키지를 해석할지 제어합니다. `com.gameframex`로 시작하는 패키지만 이 레지스트리에서 가져옵니다.
+
+Then add the package to `dependencies`:
+
+```json
+{
+  "dependencies": {
+    "com.gameframex.unity.sound": "1.2.0"
+  }
+}
+```
+
 
 ## 아키텍처
 

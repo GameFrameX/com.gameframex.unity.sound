@@ -33,86 +33,36 @@
 
 ## クイックスタート
 
-### インストール（いずれかを選択）
+### インストール
 
-1. `manifest.json` の dependencies に追加:
-   ```json
-   {"com.gameframex.unity.sound": "https://github.com/GameFrameX/com.gameframex.unity.sound.git"}
-   ```
+Unity プロジェクトの `Packages/manifest.json` を編集し、`scopedRegistries` セクションを追加してください：
 
-2. Unity Package Manager → `Add package from git URL`: https://github.com/GameFrameX/com.gameframex.unity.sound.git
-
-3. ダウンロードしてプロジェクトの `Packages` ディレクトリに配置。
-
-### 基本的な使い方
-
-```csharp
-var sound = GameEntry.GetComponent<SoundComponent>();
-
-// "BGM" グループでサウンドを再生
-int serialId = await sound.PlaySound("Assets/Audio/bgm.mp3", "BGM");
-
-// フェードアウト付きで停止
-sound.StopSound(serialId, fadeOutSeconds: 1f);
-
-// 一時停止 / 再開
-sound.PauseSound(serialId);
-sound.ResumeSound(serialId, fadeInSeconds: 0.5f);
-
-// グループの音量を設定
-sound.SetVolume("BGM", 0.5f);
-```
-
-### SoundPlayOptions の使用
-
-複雑な再生リクエストには、特定のオーバーロードに合わせる代わりに `SoundPlayOptions` を使用します:
-
-```csharp
-int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
-    new SoundPlayOptions
+```json
+{
+  "scopedRegistries": [
     {
-        Loop = false,
-        Volume = 0.8f,
-        Priority = 5,
-        BindingEntity = enemyEntity,
-        FadeInSeconds = 0.2f,
-        Pitch = 1.2f,
-        SpatialBlend = 1.0f
-    });
-```
-
-### 空間オーディオ
-
-```csharp
-// エンティティにバインド — AudioSource がエンティティの Transform に追従
-int serialId = await sound.PlaySound("Assets/Audio/footstep.mp3", "SFX",
-    bindingEntity: playerEntity);
-
-// ワールド座標で再生
-int serialId = await sound.PlaySound("Assets/Audio/explosion.mp3", "SFX",
-    worldPosition: explosionPos);
-```
-
-### イベントの購読
-
-```csharp
-// EventComponent を通じて購読
-var eventComponent = GameEntry.GetComponent<EventComponent>();
-eventComponent.Subscribe(PlaySoundSuccessEventArgs.EventId, OnPlaySuccess);
-eventComponent.Subscribe(PlaySoundFailureEventArgs.EventId, OnPlayFailure);
-
-void OnPlaySuccess(object sender, GameEventArgs e)
-{
-    var args = (PlaySoundSuccessEventArgs)e;
-    Debug.Log($"Sound playing: {args.SoundAssetName}, duration: {args.Duration}s");
-}
-
-void OnPlayFailure(object sender, GameEventArgs e)
-{
-    var args = (PlaySoundFailureEventArgs)e;
-    Debug.LogWarning($"Sound failed: {args.SoundAssetName}, error: {args.ErrorMessage}");
+      "name": "GameFrameX",
+      "url": "https://gameframex.upm.alianblank.uk",
+      "scopes": [
+        "com.gameframex"
+      ]
+    }
+  ]
 }
 ```
+
+`scopes` は、どのパッケージをこのレジストリから解決するかを制御します。`com.gameframex` で始まるパッケージのみがこのレジストリから取得されます。
+
+Then add the package to `dependencies`:
+
+```json
+{
+  "dependencies": {
+    "com.gameframex.unity.sound": "1.2.0"
+  }
+}
+```
+
 
 ## アーキテクチャ
 
