@@ -102,6 +102,6 @@ SoundComponent (MonoBehaviour)
 
 查看 [Releases](https://github.com/GameFrameX/com.gameframex.unity.sound/releases) 了解更新日志。
 
-## 许可证
+## 开源协议
 
-本项目基于 MIT 许可证开源，详情请参见 [LICENSE](LICENSE.md) 文件。
+详见 [LICENSE.md](LICENSE.md) 文件。

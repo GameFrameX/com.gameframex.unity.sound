@@ -63,7 +63,6 @@ Then add the package to `dependencies`:
 }
 ```
 
-
 ## Architecture
 
 ```
@@ -104,4 +103,4 @@ See [Releases](https://github.com/GameFrameX/com.gameframex.unity.sound/releases
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
+See [LICENSE.md](LICENSE.md) for license information.

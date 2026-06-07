@@ -63,7 +63,6 @@ Then add the package to `dependencies`:
 }
 ```
 
-
 ## 아키텍처
 
 ```
@@ -104,4 +103,4 @@ SoundComponent (MonoBehaviour)
 
 ## 라이선스
 
-이 프로젝트는 MIT 라이선스에 따라 라이선스가 부여됩니다 — 자세한 내용은 [LICENSE](LICENSE.md) 파일을 참조하세요.
+자세한 내용은 [LICENSE.md](LICENSE.md) 파일을 참조하세요.
