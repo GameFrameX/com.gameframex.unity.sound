@@ -20,6 +20,7 @@
 [English](README.md) | **简体中文** | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 </div>
+
 ## 功能特性
 
 - **声音分组** — 将声音组织为命名分组（BGM、SFX、Voice 等），每组拥有独立的音量、静音和代理数量设置

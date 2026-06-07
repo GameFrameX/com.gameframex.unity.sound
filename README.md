@@ -20,6 +20,7 @@ All-in-One Solution for Indie Game Development · Empowering Indie Developers' D
 **English** | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 </div>
+
 ## Features
 
 - **Sound Groups** — Organize sounds into named groups (BGM, SFX, Voice, etc.) with independent volume, mute, and agent count settings

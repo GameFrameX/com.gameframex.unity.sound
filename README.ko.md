@@ -20,6 +20,7 @@
 [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | **한국어**
 
 </div>
+
 ## 기능
 
 - **사운드 그룹** — 사운드를 명명된 그룹(BGM, SFX, Voice 등)으로 구성하며, 독립적인 볼륨, 음소거 및 에이전트 수 설정을 지원합니다

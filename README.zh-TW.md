@@ -20,6 +20,7 @@
 [English](README.md) | [简体中文](README.zh-CN.md) | **繁體中文** | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 </div>
+
 ## 功能特性
 
 - **音效分組** — 將音效組織到命名分組中（BGM、SFX、Voice 等），每個分組可獨立設定音量、靜音和代理數量
