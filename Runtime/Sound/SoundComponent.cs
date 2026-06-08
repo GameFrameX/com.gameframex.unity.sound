@@ -687,7 +687,7 @@ namespace GameFrameX.Sound.Runtime
                 }
             }
 
-            m_EventComponent.Fire(this, eventArgs);
+            m_EventComponent.Fire(this, PlaySoundSuccessEventArgs.Create(eventArgs.SerialId, eventArgs.SoundAssetName, eventArgs.SoundAgent, eventArgs.Duration, eventArgs.UserData));
         }
 
         private void OnPlaySoundFailure(object sender, PlaySoundFailureEventArgs eventArgs)
@@ -703,12 +703,12 @@ namespace GameFrameX.Sound.Runtime
                 Log.Warning(logMessage);
             }
 
-            m_EventComponent.Fire(this, eventArgs);
+            m_EventComponent.Fire(this, PlaySoundFailureEventArgs.Create(eventArgs.SerialId, eventArgs.SoundAssetName, eventArgs.SoundGroupName, eventArgs.PlaySoundParams, eventArgs.ErrorCode, eventArgs.ErrorMessage, eventArgs.UserData));
         }
 
         private void OnPlaySoundUpdate(object sender, PlaySoundUpdateEventArgs eventArgs)
         {
-            m_EventComponent.Fire(this, eventArgs);
+            m_EventComponent.Fire(this, PlaySoundUpdateEventArgs.Create(eventArgs.SerialId, eventArgs.SoundAssetName, eventArgs.SoundGroupName, eventArgs.PlaySoundParams, eventArgs.Progress, eventArgs.UserData));
         }
 
         private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode loadSceneMode)
