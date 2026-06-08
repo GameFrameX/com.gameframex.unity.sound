@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.2.1...1.2.2) (2026-06-08)
+
+
+### Bug Fixes
+
+* **sound:** 修复事件回调直接传递原始 EventArgs 的问题 ([8c2ef33](https://github.com/gameframex/com.gameframex.unity.sound/commit/8c2ef33e9078b738020d4b3e31a9281781bdafe8))
+
 ## [1.2.1](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.2.0...1.2.1) (2026-06-07)
 
 
