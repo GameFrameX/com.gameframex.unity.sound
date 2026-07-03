@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.2.2...1.3.0) (2026-07-03)
+
+
+### Features
+
+* **sound:** 添加音频组件初始化兜底机制 ([e5a5a5e](https://github.com/gameframex/com.gameframex.unity.sound/commit/e5a5a5e340bbc553f50756d4c15d83cc73b596f3))
+
 ## [1.2.2](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.2.1...1.2.2) (2026-06-08)
 
 
