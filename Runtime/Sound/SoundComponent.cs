@@ -32,6 +32,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Cysharp.Threading.Tasks;
 using GameFrameX.Asset.Runtime;
 using GameFrameX.Event.Runtime;
@@ -47,9 +48,15 @@ namespace GameFrameX.Sound.Runtime
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("GameFrameX/Sound")]
+    [RequireComponent(typeof(GameFrameXSoundCroppingHelper))]
     public sealed partial class SoundComponent : GameFrameworkComponent
     {
         private const int DefaultPriority = 0;
+        private const string DefaultAudioMixerResourceName = "MainAudioMixer";
+#if UNITY_EDITOR
+        private const string DefaultAudioMixerResourceFolder = "Assets/Resources";
+        private const string DefaultAudioMixerAssetPath = DefaultAudioMixerResourceFolder + "/" + DefaultAudioMixerResourceName + ".mixer";
+#endif
 
         private ISoundManager m_SoundManager = null;
         private EventComponent m_EventComponent = null;
@@ -71,7 +78,7 @@ namespace GameFrameX.Sound.Runtime
 
         [SerializeField] private SoundAgentHelperBase m_CustomSoundAgentHelper = null;
 
-        [SerializeField] private SoundGroup[] m_SoundGroups = null;
+        [SerializeField] private SoundGroup[] m_SoundGroups = Array.Empty<SoundGroup>();
 
         /// <summary>
         /// 获取声音组数量。
@@ -97,6 +104,12 @@ namespace GameFrameX.Sound.Runtime
             ImplementationComponentType = Utility.Assembly.GetType(componentType);
             InterfaceComponentType = typeof(ISoundManager);
             base.Awake();
+            EnsureAudioMixer();
+            if (!IsRuntimeComponentReady)
+            {
+                return;
+            }
+
             m_SoundManager = GameFrameworkEntry.GetModule<ISoundManager>();
             if (m_SoundManager == null)
             {
@@ -112,14 +125,87 @@ namespace GameFrameX.Sound.Runtime
             //     m_SoundManager.PlaySoundUpdate += OnPlaySoundUpdate;
             // }
 
-            m_AudioListener = gameObject.GetOrAddComponent<AudioListener>();
+            RefreshAudioListener();
 
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneUnloaded;
         }
 
+        private void EnsureAudioMixer()
+        {
+            if (m_AudioMixer != null)
+            {
+                return;
+            }
+
+            m_AudioMixer = Resources.Load<AudioMixer>(DefaultAudioMixerResourceName);
+#if UNITY_EDITOR
+            if (m_AudioMixer == null)
+            {
+                m_AudioMixer = CreateDefaultAudioMixer();
+            }
+#endif
+            if (m_AudioMixer == null)
+            {
+                Log.Warning("Default audio mixer '{0}' is missing. Sound will use Unity default audio output.", DefaultAudioMixerResourceName);
+            }
+        }
+
+#if UNITY_EDITOR
+        private static AudioMixer CreateDefaultAudioMixer()
+        {
+            if (!UnityEditor.AssetDatabase.IsValidFolder(DefaultAudioMixerResourceFolder))
+            {
+                UnityEditor.AssetDatabase.CreateFolder("Assets", "Resources");
+            }
+
+            var audioMixer = CreateDefaultAudioMixerAtPath(DefaultAudioMixerAssetPath);
+            UnityEditor.AssetDatabase.SaveAssets();
+            UnityEditor.AssetDatabase.Refresh();
+            return audioMixer;
+        }
+
+        private static AudioMixer CreateDefaultAudioMixerAtPath(string assetPath)
+        {
+            var controllerType = GetEditorAudioMixerControllerType();
+            if (controllerType == null)
+            {
+                return null;
+            }
+
+            const BindingFlags flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+            var method = controllerType.GetMethod("CreateMixerControllerAtPath", flags, null, new[] { typeof(string) }, null);
+            if (method == null)
+            {
+                return null;
+            }
+
+            return method.Invoke(null, new object[] { assetPath }) as AudioMixer;
+        }
+
+        private static Type GetEditorAudioMixerControllerType()
+        {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            for (int i = 0; i < assemblies.Length; i++)
+            {
+                var type = assemblies[i].GetType("UnityEditor.Audio.AudioMixerController");
+                if (type != null)
+                {
+                    return type;
+                }
+            }
+
+            return null;
+        }
+#endif
+
         private void Start()
         {
+            if (m_SoundManager == null)
+            {
+                return;
+            }
+
             BaseComponent baseComponent = GameEntry.GetComponent<BaseComponent>();
             if (baseComponent == null)
             {
@@ -723,7 +809,33 @@ namespace GameFrameX.Sound.Runtime
 
         private void RefreshAudioListener()
         {
-            m_AudioListener.enabled = FindObjectsOfType<AudioListener>().Length <= 1;
+            var audioListeners = FindObjectsOfType<AudioListener>();
+            bool hasOtherEnabledAudioListener = false;
+            for (int i = 0; i < audioListeners.Length; i++)
+            {
+                var audioListener = audioListeners[i];
+                if (audioListener != null &&
+                    audioListener != m_AudioListener &&
+                    audioListener.enabled &&
+                    audioListener.gameObject.activeInHierarchy)
+                {
+                    hasOtherEnabledAudioListener = true;
+                    break;
+                }
+            }
+
+            if (m_AudioListener == null)
+            {
+                if (!hasOtherEnabledAudioListener)
+                {
+                    m_AudioListener = gameObject.GetOrAddComponent<AudioListener>();
+                    m_AudioListener.enabled = true;
+                }
+
+                return;
+            }
+
+            m_AudioListener.enabled = !hasOtherEnabledAudioListener;
         }
     }
 }
