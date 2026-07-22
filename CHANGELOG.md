@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.3.0...1.3.1) (2026-07-22)
+
+
+### Bug Fixes
+
+* **sound:** 触发 PR 5 补丁版本更新 ([63fb27b](https://github.com/gameframex/com.gameframex.unity.sound/commit/63fb27b3dde757f01c7ddb6fa56b20fe82d49527)), closes [#5](https://github.com/gameframex/com.gameframex.unity.sound/issues/5)
+
 # [1.3.0](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.2.2...1.3.0) (2026-07-03)
 
 
