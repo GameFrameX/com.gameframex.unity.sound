@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.3.1...1.3.2) (2026-07-30)
+
+
+### Bug Fixes
+
+* **dependencies:** 更新依赖版本以提高兼容性和功能 ([2844cc7](https://github.com/gameframex/com.gameframex.unity.sound/commit/2844cc7a20f2510683e5495ca428bb8a35cc06dc))
+
 ## [1.3.1](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.3.0...1.3.1) (2026-07-22)
 
 
