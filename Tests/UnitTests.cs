@@ -382,5 +382,39 @@ namespace GameFrameX.Sound.Tests
         }
 
         #endregion
+
+        #region SoundOptions
+
+        /// <summary>
+        /// 验证 SoundOptions 经 GameFrameXOptions 注入差异值后可回读，且默认工厂产出默认实现。
+        /// </summary>
+        [Test]
+        public void SoundOptions_ConfigureAndTryGet_RoundTripsDiffs()
+        {
+            Func<SoundHelperBase> soundHelperFactory = () => null;
+            Func<SoundGroupHelperBase> soundGroupHelperFactory = () => null;
+            Func<SoundAgentHelperBase> soundAgentHelperFactory = () => null;
+            GameFrameXOptions.Reset();
+            GameFrameXOptions.Configure(new SoundOptions
+            {
+                SoundHelperFactory = soundHelperFactory,
+                SoundGroupHelperFactory = soundGroupHelperFactory,
+                SoundAgentHelperFactory = soundAgentHelperFactory,
+            });
+
+            Assert.IsTrue(GameFrameXOptions.TryGet<SoundOptions>(out var options));
+            Assert.That(options.SoundHelperFactory, Is.SameAs(soundHelperFactory));
+            Assert.That(options.SoundGroupHelperFactory, Is.SameAs(soundGroupHelperFactory));
+            Assert.That(options.SoundAgentHelperFactory, Is.SameAs(soundAgentHelperFactory));
+
+            GameFrameXOptions.Reset();
+            // 默认工厂为 MonoBehaviour 创建闭包（PlayMode 语义），EditMode 仅断言委托非空；类型正确性由 SoundOptions 源码默认值保证。
+            var defaults = new SoundOptions();
+            Assert.IsNotNull(defaults.SoundHelperFactory);
+            Assert.IsNotNull(defaults.SoundGroupHelperFactory);
+            Assert.IsNotNull(defaults.SoundAgentHelperFactory);
+        }
+
+        #endregion
     }
 }

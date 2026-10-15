@@ -46,6 +46,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置声音组辅助器所在的混音组。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public AudioMixerGroup AudioMixerGroup
         {
             get { return m_AudioMixerGroup; }

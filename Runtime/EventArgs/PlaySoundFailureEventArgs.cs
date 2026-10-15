@@ -43,6 +43,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 初始化播放声音失败事件的新实例。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public PlaySoundFailureEventArgs()
         {
             SerialId = 0;
@@ -57,36 +58,43 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取声音的序列编号。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public int SerialId { get; private set; }
 
         /// <summary>
         /// 获取声音资源名称。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public string SoundAssetName { get; private set; }
 
         /// <summary>
         /// 获取声音组名称。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public string SoundGroupName { get; private set; }
 
         /// <summary>
         /// 获取播放声音参数。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public PlaySoundParams PlaySoundParams { get; private set; }
 
         /// <summary>
         /// 获取错误码。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public PlaySoundErrorCode ErrorCode { get; private set; }
 
         /// <summary>
         /// 获取错误信息。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public string ErrorMessage { get; private set; }
 
         /// <summary>
         /// 获取用户自定义数据。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public object UserData { get; private set; }
 
         /// <summary>
@@ -100,6 +108,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="errorMessage">错误信息。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>创建的播放声音失败事件。</returns>
+        [UnityEngine.Scripting.Preserve]
         public static PlaySoundFailureEventArgs Create(int serialId, string soundAssetName, string soundGroupName, PlaySoundParams playSoundParams, PlaySoundErrorCode errorCode, string errorMessage,
             object userData)
         {

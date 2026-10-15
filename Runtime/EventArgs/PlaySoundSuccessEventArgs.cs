@@ -43,6 +43,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 初始化播放声音成功事件的新实例。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public PlaySoundSuccessEventArgs()
         {
             SerialId = 0;
@@ -55,26 +56,31 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取声音的序列编号。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public int SerialId { get; private set; }
 
         /// <summary>
         /// 获取声音资源名称。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public string SoundAssetName { get; private set; }
 
         /// <summary>
         /// 获取用于播放的声音代理。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public ISoundAgent SoundAgent { get; private set; }
 
         /// <summary>
         /// 获取加载持续时间。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float Duration { get; private set; }
 
         /// <summary>
         /// 获取用户自定义数据。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public object UserData { get; private set; }
 
         /// <summary>
@@ -86,6 +92,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="duration">加载持续时间。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>创建的播放声音成功事件。</returns>
+        [UnityEngine.Scripting.Preserve]
         public static PlaySoundSuccessEventArgs Create(int serialId, string soundAssetName, ISoundAgent soundAgent, float duration, object userData)
         {
             PlaySoundSuccessEventArgs playSoundSuccessEventArgs = ReferencePool.Acquire<PlaySoundSuccessEventArgs>();

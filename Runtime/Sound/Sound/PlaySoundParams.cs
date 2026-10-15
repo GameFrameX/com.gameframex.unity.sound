@@ -102,6 +102,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 初始化播放声音参数的新实例。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public PlaySoundParams()
         {
             m_Referenced = false;
@@ -121,6 +122,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置播放位置。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float Time
         {
             get { return m_Time; }
@@ -130,6 +132,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置在声音组内是否静音。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public bool MuteInSoundGroup
         {
             get { return m_MuteInSoundGroup; }
@@ -139,6 +142,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置是否循环播放。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public bool Loop
         {
             get { return m_Loop; }
@@ -148,6 +152,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置声音优先级。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public int Priority
         {
             get { return m_Priority; }
@@ -157,6 +162,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置在声音组内音量大小。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float VolumeInSoundGroup
         {
             get { return m_VolumeInSoundGroup; }
@@ -166,6 +172,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置声音淡入时间，以秒为单位。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float FadeInSeconds
         {
             get { return m_FadeInSeconds; }
@@ -175,6 +182,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置声音音调。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float Pitch
         {
             get { return m_Pitch; }
@@ -184,6 +192,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置声音立体声声相。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float PanStereo
         {
             get { return m_PanStereo; }
@@ -193,6 +202,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置声音空间混合量。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float SpatialBlend
         {
             get { return m_SpatialBlend; }
@@ -202,6 +212,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置声音最大距离。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float MaxDistance
         {
             get { return m_MaxDistance; }
@@ -211,6 +222,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置声音多普勒等级。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float DopplerLevel
         {
             get { return m_DopplerLevel; }
@@ -230,6 +242,7 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         /// <param name="isLoop">是否循环播放。</param>
         /// <returns>创建的播放声音参数。</returns>
+        [UnityEngine.Scripting.Preserve]
         public static PlaySoundParams Create(bool isLoop = false)
         {
             PlaySoundParams playSoundParams = ReferencePool.Acquire<PlaySoundParams>();
@@ -241,6 +254,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 清理播放声音参数。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public void Clear()
         {
             m_Time = Constant.DefaultTime;

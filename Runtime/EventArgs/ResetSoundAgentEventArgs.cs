@@ -43,6 +43,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 初始化重置声音代理事件的新实例。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public ResetSoundAgentEventArgs()
         {
         }
@@ -51,6 +52,7 @@ namespace GameFrameX.Sound.Runtime
         /// 创建重置声音代理事件。
         /// </summary>
         /// <returns>创建的重置声音代理事件。</returns>
+        [UnityEngine.Scripting.Preserve]
         public static ResetSoundAgentEventArgs Create()
         {
             ResetSoundAgentEventArgs resetSoundAgentEventArgs = ReferencePool.Acquire<ResetSoundAgentEventArgs>();

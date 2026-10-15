@@ -1,4 +1,4 @@
-﻿// ==========================================================================================
+// ==========================================================================================
 //  GameFrameX 组织及其衍生项目的版权、商标、专利及其他相关权利
 //  GameFrameX organization and its derivative projects' copyrights, trademarks, patents, and related rights
 //  均受中华人民共和国及相关国际法律法规保护。
@@ -29,7 +29,6 @@
 //  Official Documentation: https://gameframex.doc.alianblank.com/
 // ==========================================================================================
 
-
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -44,7 +43,7 @@ namespace GameFrameX.Sound.Runtime
     /// 声音管理器。
     /// </summary>
     [UnityEngine.Scripting.Preserve]
-    public sealed partial class SoundManager : GameFrameworkModule, ISoundManager
+    public sealed partial class SoundManager : IGameFrameworkModule, ISoundManager, IShutdownableModule
     {
         private readonly Dictionary<string, SoundGroup> m_SoundGroups;
         private readonly List<int> m_SoundsBeingLoaded;
@@ -62,6 +61,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 初始化声音管理器的新实例。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public SoundManager()
         {
             m_SoundGroups = new Dictionary<string, SoundGroup>(StringComparer.Ordinal);
@@ -79,6 +79,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取声音组数量。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public int SoundGroupCount
         {
             get { return m_SoundGroups.Count; }
@@ -112,18 +113,10 @@ namespace GameFrameX.Sound.Runtime
         }*/
 
         /// <summary>
-        /// 声音管理器轮询。
-        /// </summary>
-        /// <param name="elapseSeconds">逻辑流逝时间，以秒为单位。</param>
-        /// <param name="realElapseSeconds">真实流逝时间，以秒为单位。</param>
-        protected override void Update(float elapseSeconds, float realElapseSeconds)
-        {
-        }
-
-        /// <summary>
         /// 关闭并清理声音管理器。
         /// </summary>
-        protected override void Shutdown()
+        [UnityEngine.Scripting.Preserve]
+        public void Shutdown()
         {
             StopAllLoadedSounds();
             m_SoundGroups.Clear();
@@ -135,6 +128,7 @@ namespace GameFrameX.Sound.Runtime
         /// 设置资源管理器。
         /// </summary>
         /// <param name="assetManager">资源管理器。</param>
+        [UnityEngine.Scripting.Preserve]
         public void SetResourceManager(IAssetManager assetManager)
         {
             if (assetManager == null)
@@ -149,6 +143,7 @@ namespace GameFrameX.Sound.Runtime
         /// 设置声音辅助器。
         /// </summary>
         /// <param name="soundHelper">声音辅助器。</param>
+        [UnityEngine.Scripting.Preserve]
         public void SetSoundHelper(ISoundHelper soundHelper)
         {
             if (soundHelper == null)
@@ -164,6 +159,7 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         /// <param name="soundGroupName">声音组名称。</param>
         /// <returns>指定声音组是否存在。</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool HasSoundGroup(string soundGroupName)
         {
             if (string.IsNullOrEmpty(soundGroupName))
@@ -179,6 +175,7 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         /// <param name="soundGroupName">声音组名称。</param>
         /// <returns>要获取的声音组。</returns>
+        [UnityEngine.Scripting.Preserve]
         public ISoundGroup GetSoundGroup(string soundGroupName)
         {
             if (string.IsNullOrEmpty(soundGroupName))
@@ -198,6 +195,7 @@ namespace GameFrameX.Sound.Runtime
         /// 获取所有声音组。
         /// </summary>
         /// <returns>所有声音组。</returns>
+        [UnityEngine.Scripting.Preserve]
         public ISoundGroup[] GetAllSoundGroups()
         {
             int index = 0;
@@ -214,6 +212,7 @@ namespace GameFrameX.Sound.Runtime
         /// 获取所有声音组。
         /// </summary>
         /// <param name="results">所有声音组。</param>
+        [UnityEngine.Scripting.Preserve]
         public void GetAllSoundGroups(List<ISoundGroup> results)
         {
             if (results == null)
@@ -234,6 +233,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="soundGroupHelper">声音组辅助器。</param>
         /// <returns>是否增加声音组成功。</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool AddSoundGroup(string soundGroupName, ISoundGroupHelper soundGroupHelper)
         {
             return AddSoundGroup(soundGroupName, false, Constant.DefaultMute, Constant.DefaultVolume, soundGroupHelper);
@@ -248,6 +248,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupVolume">声音组音量。</param>
         /// <param name="soundGroupHelper">声音组辅助器。</param>
         /// <returns>是否增加声音组成功。</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool AddSoundGroup(string soundGroupName, bool soundGroupAvoidBeingReplacedBySamePriority, bool soundGroupMute, float soundGroupVolume, ISoundGroupHelper soundGroupHelper)
         {
             if (string.IsNullOrEmpty(soundGroupName))
@@ -282,6 +283,7 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="soundAgentHelper">要增加的声音代理辅助器。</param>
+        [UnityEngine.Scripting.Preserve]
         public void AddSoundAgentHelper(string soundGroupName, ISoundAgentHelper soundAgentHelper)
         {
             if (m_SoundHelper == null)
@@ -302,6 +304,7 @@ namespace GameFrameX.Sound.Runtime
         /// 获取所有正在加载声音的序列编号。
         /// </summary>
         /// <returns>所有正在加载声音的序列编号。</returns>
+        [UnityEngine.Scripting.Preserve]
         public int[] GetAllLoadingSoundSerialIds()
         {
             return m_SoundsBeingLoaded.ToArray();
@@ -311,6 +314,7 @@ namespace GameFrameX.Sound.Runtime
         /// 获取所有正在加载声音的序列编号。
         /// </summary>
         /// <param name="results">所有正在加载声音的序列编号。</param>
+        [UnityEngine.Scripting.Preserve]
         public void GetAllLoadingSoundSerialIds(List<int> results)
         {
             if (results == null)
@@ -327,6 +331,7 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         /// <param name="serialId">声音序列编号。</param>
         /// <returns>是否正在加载声音。</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool IsLoadingSound(int serialId)
         {
             return m_SoundsBeingLoaded.Contains(serialId);
@@ -338,6 +343,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundAssetName">声音资源名称。</param>
         /// <param name="soundGroupName">声音组名称。</param>
         /// <returns>声音的序列编号。</returns>
+        [UnityEngine.Scripting.Preserve]
         public UniTask<int> PlaySound(string soundAssetName, string soundGroupName)
         {
             return PlaySound(soundAssetName, soundGroupName, Constant.DefaultPriority, null, null);
@@ -350,6 +356,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="priority">加载声音资源的优先级。</param>
         /// <returns>声音的序列编号。</returns>
+        [UnityEngine.Scripting.Preserve]
         public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority)
         {
             return PlaySound(soundAssetName, soundGroupName, priority, null, null);
@@ -362,6 +369,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="playSoundParams">播放声音参数。</param>
         /// <returns>声音的序列编号。</returns>
+        [UnityEngine.Scripting.Preserve]
         public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, PlaySoundParams playSoundParams)
         {
             return PlaySound(soundAssetName, soundGroupName, Constant.DefaultPriority, playSoundParams, null);
@@ -374,6 +382,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>声音的序列编号。</returns>
+        [UnityEngine.Scripting.Preserve]
         public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, object userData)
         {
             return PlaySound(soundAssetName, soundGroupName, Constant.DefaultPriority, null, userData);
@@ -387,6 +396,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="priority">加载声音资源的优先级。</param>
         /// <param name="playSoundParams">播放声音参数。</param>
         /// <returns>声音的序列编号。</returns>
+        [UnityEngine.Scripting.Preserve]
         public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority, PlaySoundParams playSoundParams)
         {
             return PlaySound(soundAssetName, soundGroupName, priority, playSoundParams, null);
@@ -399,6 +409,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="soundGroupName">声音组名称。</param>
         /// <param name="serialId">加载声音资源的优先级。</param>
         /// <returns>声音的序列编号。</returns>
+        [UnityEngine.Scripting.Preserve]
         public UniTask<int> PlaySoundBySerialId(string soundAssetName, string soundGroupName, int serialId)
         {
             return PlaySound(soundAssetName, soundGroupName, Constant.DefaultPriority, null, null, serialId);
@@ -412,6 +423,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="priority">加载声音资源的优先级。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>声音的序列编号。</returns>
+        [UnityEngine.Scripting.Preserve]
         public UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority, object userData)
         {
             return PlaySound(soundAssetName, soundGroupName, priority, null, userData);
@@ -425,6 +437,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="playSoundParams">播放声音参数。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>声音的序列编号。</returns>
+        [UnityEngine.Scripting.Preserve]
         public async UniTask<int> PlaySound(string soundAssetName, string soundGroupName, PlaySoundParams playSoundParams, object userData)
         {
             return await PlaySound(soundAssetName, soundGroupName, Constant.DefaultPriority, playSoundParams, userData);
@@ -440,6 +453,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="userData">用户自定义数据。</param>
         /// <param name="serialId">序列编号</param>
         /// <returns>声音的序列编号。</returns>
+        [UnityEngine.Scripting.Preserve]
         public async UniTask<int> PlaySound(string soundAssetName, string soundGroupName, int priority, PlaySoundParams playSoundParams, object userData, int? serialId = null)
         {
             if (_assetManager == null)
@@ -466,7 +480,6 @@ namespace GameFrameX.Sound.Runtime
             {
                 newSerialId = ++m_Serial;
             }
-
 
             PlaySoundErrorCode? errorCode = null;
             string errorMessage = null;
@@ -528,6 +541,7 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         /// <param name="serialId">要停止播放声音的序列编号。</param>
         /// <returns>是否停止播放声音成功。</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool StopSound(int serialId)
         {
             return StopSound(serialId, Constant.DefaultFadeOutSeconds);
@@ -539,6 +553,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="serialId">要停止播放声音的序列编号。</param>
         /// <param name="fadeOutSeconds">声音淡出时间，以秒为单位。</param>
         /// <returns>是否停止播放声音成功。</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool StopSound(int serialId, float fadeOutSeconds)
         {
             if (IsLoadingSound(serialId))
@@ -562,6 +577,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 停止所有已加载的声音。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public void StopAllLoadedSounds()
         {
             StopAllLoadedSounds(Constant.DefaultFadeOutSeconds);
@@ -571,6 +587,7 @@ namespace GameFrameX.Sound.Runtime
         /// 停止所有已加载的声音。
         /// </summary>
         /// <param name="fadeOutSeconds">声音淡出时间，以秒为单位。</param>
+        [UnityEngine.Scripting.Preserve]
         public void StopAllLoadedSounds(float fadeOutSeconds)
         {
             foreach (KeyValuePair<string, SoundGroup> soundGroup in m_SoundGroups)
@@ -582,6 +599,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 停止所有正在加载的声音。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public void StopAllLoadingSounds()
         {
             foreach (int serialId in m_SoundsBeingLoaded)
@@ -594,6 +612,7 @@ namespace GameFrameX.Sound.Runtime
         /// 暂停播放声音。
         /// </summary>
         /// <param name="serialId">要暂停播放声音的序列编号。</param>
+        [UnityEngine.Scripting.Preserve]
         public void PauseSound(int serialId)
         {
             PauseSound(serialId, Constant.DefaultFadeOutSeconds);
@@ -604,6 +623,7 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         /// <param name="serialId">要暂停播放声音的序列编号。</param>
         /// <param name="fadeOutSeconds">声音淡出时间，以秒为单位。</param>
+        [UnityEngine.Scripting.Preserve]
         public void PauseSound(int serialId, float fadeOutSeconds)
         {
             foreach (KeyValuePair<string, SoundGroup> soundGroup in m_SoundGroups)
@@ -621,6 +641,7 @@ namespace GameFrameX.Sound.Runtime
         /// 恢复播放声音。
         /// </summary>
         /// <param name="serialId">要恢复播放声音的序列编号。</param>
+        [UnityEngine.Scripting.Preserve]
         public void ResumeSound(int serialId)
         {
             ResumeSound(serialId, Constant.DefaultFadeInSeconds);
@@ -631,6 +652,7 @@ namespace GameFrameX.Sound.Runtime
         /// </summary>
         /// <param name="serialId">要恢复播放声音的序列编号。</param>
         /// <param name="fadeInSeconds">声音淡入时间，以秒为单位。</param>
+        [UnityEngine.Scripting.Preserve]
         public void ResumeSound(int serialId, float fadeInSeconds)
         {
             foreach (KeyValuePair<string, SoundGroup> soundGroup in m_SoundGroups)

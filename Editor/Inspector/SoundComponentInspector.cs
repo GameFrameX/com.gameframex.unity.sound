@@ -44,9 +44,9 @@ namespace GameFrameX.Sound.Editor
         private SerializedProperty m_AudioMixer = null;
         private SerializedProperty m_SoundGroups = null;
 
-        private HelperInfo<SoundHelperBase> m_SoundHelperInfo = new HelperInfo<SoundHelperBase>("Sound");
-        private HelperInfo<SoundGroupHelperBase> m_SoundGroupHelperInfo = new HelperInfo<SoundGroupHelperBase>("SoundGroup");
-        private HelperInfo<SoundAgentHelperBase> m_SoundAgentHelperInfo = new HelperInfo<SoundAgentHelperBase>("SoundAgent");
+        private SerializedProperty m_CustomSoundHelper = null;
+        private SerializedProperty m_CustomSoundGroupHelper = null;
+        private SerializedProperty m_CustomSoundAgentHelper = null;
 
         public override void OnInspectorGUI()
         {
@@ -62,12 +62,15 @@ namespace GameFrameX.Sound.Editor
                 // EditorGUILayout.PropertyField(m_EnablePlaySoundDependencyAssetEvent);
                 EditorGUILayout.PropertyField(m_InstanceRoot);
                 EditorGUILayout.PropertyField(m_AudioMixer);
-                m_SoundHelperInfo.Draw();
-                m_SoundGroupHelperInfo.Draw();
-                m_SoundAgentHelperInfo.Draw();
+                EditorGUILayout.PropertyField(m_CustomSoundHelper);
+                EditorGUILayout.PropertyField(m_CustomSoundGroupHelper);
+                EditorGUILayout.PropertyField(m_CustomSoundAgentHelper);
                 EditorGUILayout.PropertyField(m_SoundGroups, true);
             }
             EditorGUI.EndDisabledGroup();
+
+            // C9 活视图：编辑态提示 SoundOptions 入口；Play 态只读显示三个 Helper 工厂（启动期型）。
+            GameFrameXOptionsLiveViewUtility.DrawLiveView(t, typeof(SoundOptions));
 
             if (EditorApplication.isPlaying && IsPrefabInHierarchy(t.gameObject))
             {
@@ -82,9 +85,6 @@ namespace GameFrameX.Sound.Editor
         protected override void RefreshTypeNames()
         {
             RefreshComponentTypeNames(typeof(ISoundManager));
-            m_SoundHelperInfo.Refresh();
-            m_SoundGroupHelperInfo.Refresh();
-            m_SoundAgentHelperInfo.Refresh();
             serializedObject.ApplyModifiedProperties();
         }
 
@@ -96,9 +96,10 @@ namespace GameFrameX.Sound.Editor
             m_AudioMixer = serializedObject.FindProperty("m_AudioMixer");
             m_SoundGroups = serializedObject.FindProperty("m_SoundGroups");
 
-            m_SoundHelperInfo.Init(serializedObject);
-            m_SoundGroupHelperInfo.Init(serializedObject);
-            m_SoundAgentHelperInfo.Init(serializedObject);
+
+            m_CustomSoundHelper = serializedObject.FindProperty("m_CustomSoundHelper");
+            m_CustomSoundGroupHelper = serializedObject.FindProperty("m_CustomSoundGroupHelper");
+            m_CustomSoundAgentHelper = serializedObject.FindProperty("m_CustomSoundAgentHelper");
 
             RefreshTypeNames();
         }

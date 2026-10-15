@@ -43,31 +43,37 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取或设置加载声音资源的优先级。默认 <see cref="SoundComponent.DefaultPriority"/>。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public int Priority { get; set; } = Constant.DefaultPriority;
 
         /// <summary>
         /// 获取或设置播放声音参数。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public PlaySoundParams PlaySoundParams { get; set; } = null;
 
         /// <summary>
         /// 获取或设置声音绑定的实体。与 <see cref="WorldPosition"/> 互斥，实体绑定优先。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public Entity.Runtime.Entity BindingEntity { get; set; } = null;
 
         /// <summary>
         /// 获取或设置声音所在的世界坐标。当 <see cref="BindingEntity"/> 不为 null 时忽略。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public Vector3? WorldPosition { get; set; } = null;
 
         /// <summary>
         /// 获取或设置用户自定义数据。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public object UserData { get; set; } = null;
 
         /// <summary>
         /// 获取或设置声音的序列编号。为 null 时自动生成。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public int? SerialId { get; set; } = null;
     }
 }

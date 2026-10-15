@@ -43,6 +43,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 初始化播放声音更新事件的新实例。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public PlaySoundUpdateEventArgs()
         {
             SerialId = 0;
@@ -56,31 +57,37 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取声音的序列编号。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public int SerialId { get; private set; }
 
         /// <summary>
         /// 获取声音资源名称。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public string SoundAssetName { get; private set; }
 
         /// <summary>
         /// 获取声音组名称。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public string SoundGroupName { get; private set; }
 
         /// <summary>
         /// 获取播放声音参数。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public PlaySoundParams PlaySoundParams { get; private set; }
 
         /// <summary>
         /// 获取加载声音进度。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public float Progress { get; private set; }
 
         /// <summary>
         /// 获取用户自定义数据。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public object UserData { get; private set; }
 
         /// <summary>
@@ -93,6 +100,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="progress">加载声音进度。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>创建的播放声音更新事件。</returns>
+        [UnityEngine.Scripting.Preserve]
         public static PlaySoundUpdateEventArgs Create(int serialId, string soundAssetName, string soundGroupName, PlaySoundParams playSoundParams, float progress, object userData)
         {
             PlaySoundUpdateEventArgs playSoundUpdateEventArgs = ReferencePool.Acquire<PlaySoundUpdateEventArgs>();

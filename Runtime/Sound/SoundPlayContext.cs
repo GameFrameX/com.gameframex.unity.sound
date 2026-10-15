@@ -58,6 +58,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 初始化播放声音信息的新实例。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public SoundPlayContext()
         {
             m_BindingEntity = null;
@@ -68,6 +69,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取绑定的实体。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public Entity.Runtime.Entity BindingEntity
         {
             get { return m_BindingEntity; }
@@ -76,6 +78,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取声音在世界空间中的位置。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public Vector3 WorldPosition
         {
             get { return m_WorldPosition; }
@@ -84,6 +87,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 获取用户自定义数据。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public object UserData
         {
             get { return m_UserData; }
@@ -96,6 +100,7 @@ namespace GameFrameX.Sound.Runtime
         /// <param name="worldPosition">声音在世界空间中的位置。</param>
         /// <param name="userData">用户自定义数据。</param>
         /// <returns>创建的播放声音信息。</returns>
+        [UnityEngine.Scripting.Preserve]
         public static SoundPlayContext Create(Entity.Runtime.Entity bindingEntity, Vector3 worldPosition, object userData)
         {
             SoundPlayContext playSoundInfo = ReferencePool.Acquire<SoundPlayContext>();
@@ -108,6 +113,7 @@ namespace GameFrameX.Sound.Runtime
         /// <summary>
         /// 清理播放声音信息。
         /// </summary>
+        [UnityEngine.Scripting.Preserve]
         public void Clear()
         {
             m_BindingEntity = null;
