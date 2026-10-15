@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.3.2...2.0.0) (2026-10-15)
+
+
+* feat(module)!: 音频模块薄入口化并新增 SoundOptions ([5853b83](https://github.com/gameframex/com.gameframex.unity.sound/commit/5853b83b62a05e7d3e067d5b184c8de45ec177d4))
+
+
+### BREAKING CHANGES
+
+* SoundComponent 序列化字段移除，编辑期配置入口收敛到代码 SoundOptions。
+
 ## [Unreleased]
 
 ### ⚠ BREAKING CHANGES
