@@ -2,7 +2,7 @@
     "name": "com.gameframex.unity.sound",
     "displayName": "Game Frame X Sound",
     "category": "GameFrameX",
-    "description": "GameFrameX Sound — Unity audio management package. Provides organized playback through sound groups with independent mute/volume/priority, async playback with priority queuing, full lifecycle control (stop, pause, resume with fade), spatial audio binding to game entities, and event-driven success/failure notifications. Docs: https://gameframex.doc.alianblank.com\n\nGameFrameX Sound — Unity 音频管理功能包。通过声音组提供组织化播放，各组独立静音/音量/优先级，支持异步优先级队列播放、完整生命周期控制（停止、暂停、恢复含淡入淡出）、空间音频绑定到游戏实体，以及事件驱动的成功/失败通知。文档：https://gameframex.doc.alianblank.com",
+    "description": "GameFrameX Sound — Unity audio management package. Plays sounds asynchronously (UniTask returning serial ids) through sound groups with independent mute / volume / priority, positional audio bound to entities or world positions, SoundPlayOptions to collapse play overloads, agent pooling per group, full lifecycle control (stop, pause, resume) and event-driven success / failure / update notifications. Startup moves to code-level SoundOptions (GameFrameXOptions.Configure: helper factories). Docs: https://gameframex.doc.alianblank.com\n\nGameFrameX Sound — Unity 音频管理功能包。通过声音组异步播放音效（UniTask 返回序列号），各组独立静音/音量/优先级，支持绑定实体或世界坐标的空间音频、收敛播放重载的 SoundPlayOptions、组内代理池化、完整生命周期控制（停止、暂停、恢复）及成功/失败/更新事件通知。启动配置收敛为代码级 SoundOptions（GameFrameXOptions.Configure：各 Helper 工厂）。文档：https://gameframex.doc.alianblank.com",
     "version": "2.0.0",
     "unity": "2019.4",
     "keywords": [
