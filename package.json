@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "com.gameframex.unity": "3.0.0",
-        "com.gameframex.unity.asset": "4.0.0",
+        "com.gameframex.unity.asset": "5.0.0",
         "com.gameframex.unity.entity": "3.0.0",
         "com.gameframex.unity.event": "2.0.0",
         "com.gameframex.unity.cysharp.unitask": "2.6.2",
