@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/gameframex/com.gameframex.unity.sound/compare/2.0.0...2.0.1) (2026-10-15)
+
+
+### Bug Fixes
+
+* **dependencies:** asset 依赖升至 5.0.0 ([aac25d7](https://github.com/gameframex/com.gameframex.unity.sound/commit/aac25d7215b716d44b6e5b39a6beeb66e6ecdab6))
+
 # [2.0.0](https://github.com/gameframex/com.gameframex.unity.sound/compare/1.3.2...2.0.0) (2026-10-15)
 
 
